@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+/* Tu configuración personalizada va aquí con @theme */
+@theme {
+  --color-background: #0a0000;
+  --color-surface: #120505;
+  --color-surface-container: #200808;
+  --color-surface-container-high: #2a0a0a;
+  --color-primary: #b02d29;
+  --color-secondary: #ec6a06;
+  --color-tertiary: #f9bd22;
+  --color-primary-container: #690005;
+  --color-secondary-container: #93000a;
+  --color-on-surface: #eae0e0;
+  --color-on-surface-variant: #e1bfbb;
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  --animate-glow: glow 2s ease-in-out infinite alternate;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes glow {
+    0% { box-shadow: 0 0 5px rgba(236, 106, 6, 0.3); }
+    100% { box-shadow: 0 0 20px rgba(236, 106, 6, 0.8), 0 0 40px rgba(176, 45, 41, 0.4); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+}
+
+/* Resto de tus estilos personalizados */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0a0000;
+  color: #eae0e0;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.glass-panel {
+  background: rgba(42, 10, 10, 0.35);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(176, 45, 41, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(236, 106, 6, 0.4),
+    rgba(176, 45, 41, 0.1)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.burning-text {
+  background-image: linear-gradient(
+    to right,
+    #690005,
+    #b02d29,
+    #ec6a06,
+    #f9bd22
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.neon-strip {
+  position: absolute;
+  left: -1px;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, #ec6a06, #b02d29, transparent);
+  box-shadow: 0 0 8px #ec6a06, 0 0 16px rgba(176, 45, 41, 0.5);
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0000; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #b02d29, #ec6a06);
+  border-radius: 3px;
+}
+
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+::selection { background-color: #93000a; color: #eae0e0; }
+
+#webgl-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.cursor-blink { animation: blink 1s step-end infinite; }
