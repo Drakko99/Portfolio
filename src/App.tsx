@@ -8,25 +8,27 @@ import HeroSection from './components/HeroSection';
 import ProjectsGallery from './components/ProjectsGallery';
 import ExperienceTimeline from './components/ExperienceTimeline';
 import TechStack from './components/TechStack';
-import TerminalContact from './components/TerminalContact';
 import Footer from './components/Footer';
 
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   useEffect(() => {
-    // Parallax effect for sections - más suave y con más espacio visual
+    // Efecto de transición suave entre secciones
     gsap.utils.toArray('section').forEach((section) => {
-      gsap.to(section, {
-        yPercent: -5,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top bottom+=100',
-          end: 'bottom top-=100',
-          scrub: true,
-        },
-      });
+      gsap.fromTo(section, 
+        { opacity: 0.7 },
+        {
+          opacity: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top center-=100',
+            end: 'center center',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
     });
 
     return () => {
@@ -42,16 +44,15 @@ function App() {
       {/* Navigation */}
       <Navbar />
 
-      {/* Main Content - cada sección con padding generoso */}
-      <main className="relative z-10 flex flex-col gap-24">
+      {/* Main Content - Cada sección es como una "página" separada */}
+      <main className="relative z-10 flex flex-col">
         <HeroSection />
         <ProjectsGallery />
         <ExperienceTimeline />
         <TechStack />
-        <TerminalContact />
       </main>
 
-      {/* Footer */}
+      {/* Footer minimalista */}
       <Footer />
     </div>
   );

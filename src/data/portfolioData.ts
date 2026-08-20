@@ -24,7 +24,8 @@ export const projects = [
         description: 'Juego social del impostor para jugar con amigos en fiestas y quedadas. Aplicación móvil desarrollada completamente en Flutter/Dart con sincronización en tiempo real.',
         tech: ['Flutter', 'Dart', 'Real-time'],
         github: 'https://github.com/Drakko99/juego_impostor',
-        image: '/images/project-nexus.jpg',
+        store: 'https://play.google.com/store/apps/details?id=com.drakko99.juego_impostor&pcampaignid=web_share',
+        published: true,
     },
     {
         id: 2,
@@ -33,7 +34,7 @@ export const projects = [
         description: 'Script avanzado para monitorizar la disponibilidad de stock en tiendas online. Notificaciones instantáneas cuando un producto vuelve a estar disponible.',
         tech: ['TypeScript', 'Node.js', 'Web Scraping'],
         github: 'https://github.com/Drakko99/MonitorStockTS',
-        image: '/images/ignition-api.jpg',
+        published: false,
     },
     {
         id: 3,
@@ -42,7 +43,7 @@ export const projects = [
         description: 'Cliente web para biblioteca personal de videojuegos. Gestión completa del catálogo con interfaz moderna y responsive.',
         tech: ['Next.js', 'TypeScript', 'React'],
         github: 'https://github.com/Drakko99/game-library-web',
-        image: '/images/cipher-protocol.jpg',
+        published: false,
     },
 ];
 
@@ -76,5 +77,5 @@ export const techStack = {
 export const socialLinks = {
     github: 'https://github.com/Drakko99',
     linkedin: 'https://www.linkedin.com/in/adrián-rodríguez-del-río-15446b2bb/',
-    email: 'contact@drakko99.dev',
+    email: 'adrianrdr17@gmail.com',
 };

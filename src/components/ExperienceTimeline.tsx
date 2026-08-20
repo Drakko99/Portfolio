@@ -70,7 +70,7 @@ export default function ExperienceTimeline() {
     const isInView = useInView(ref, { once: true, margin: '-100px' });
 
     return (
-        <section id="experience" className="py-32 px-6 md:px-16 relative">
+        <section id="experience" className="min-h-screen flex items-center py-24 px-6 md:px-16 relative">
             {/* Neon Strip */}
             <motion.div
                 className="neon-strip top-[10%] h-[80%]"
@@ -96,7 +96,7 @@ export default function ExperienceTimeline() {
             </motion.div>
 
             {/* Timeline */}
-            <div className="flex flex-col gap-6 pl-8 border-l border-primary/20 ml-4">
+            <div className="flex flex-col gap-6 pl-8 border-l border-primary/20 ml-4 max-w-3xl">
                 {experience.map((exp, index) => (
                     <ExperienceCard key={exp.id} exp={exp} index={index} />
                 ))}

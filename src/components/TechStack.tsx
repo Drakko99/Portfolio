@@ -75,7 +75,7 @@ export default function TechStack() {
     const isInView = useInView(ref, { once: true, margin: '-100px' });
 
     return (
-        <section id="stack" className="py-32 px-6 md:px-16 relative">
+        <section id="stack" className="min-h-screen flex items-center py-24 px-6 md:px-16 relative">
             {/* Neon Strip */}
             <motion.div
                 className="neon-strip top-[15%] h-[70%]"
@@ -97,7 +97,7 @@ export default function TechStack() {
                 </h2>
             </motion.div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 w-full max-w-6xl">
                 {/* Languages - Takes 2 columns */}
                 <motion.div
                     className="lg:col-span-2 glass-panel p-8 rounded-xl"
@@ -116,7 +116,7 @@ export default function TechStack() {
                     </div>
                 </motion.div>
 
-                {/* All Tools - Takes 3 columns, fills the space */}
+                {/* All Tools - Takes 3 columns */}
                 <motion.div
                     className="lg:col-span-3 glass-panel p-8 rounded-xl"
                     initial={{ opacity: 0, y: 30 }}

@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiMenu, FiX } from 'react-icons/fi';
 
+// Orden que coincide con el flujo de la página: Projects → Experience → Stack → Contact (Hero)
 const navItems = [
+    { label: 'Projects', href: '#projects' },
     { label: 'Experience', href: '#experience' },
     { label: 'Stack', href: '#stack' },
-    { label: 'Projects', href: '#projects' },
-    { label: 'Contact', href: '#contact' },
 ];
 
 export default function Navbar() {
@@ -18,7 +18,8 @@ export default function Navbar() {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
 
-            const sections = ['experience', 'stack', 'projects', 'contact'];
+            // Actualizar sección activa según scroll
+            const sections = ['projects', 'experience', 'stack'];
             for (const section of sections) {
                 const element = document.getElementById(section);
                 if (element) {
@@ -29,6 +30,11 @@ export default function Navbar() {
                     }
                 }
             }
+
+            // Si estamos arriba del todo, marcar como hero/contact
+            if (window.scrollY < 300) {
+                setActiveSection('hero');
+            }
         };
 
         window.addEventListener('scroll', handleScroll);
@@ -37,6 +43,10 @@ export default function Navbar() {
 
     const scrollToSection = (href: string) => {
         setMobileMenuOpen(false);
+        if (href === '#top') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+        }
         const element = document.querySelector(href);
         if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
@@ -55,16 +65,16 @@ export default function Navbar() {
                     }`}
             >
                 <div className="flex justify-between items-center px-6 py-3 md:px-8">
-                    {/* Logo - Full Name */}
+                    {/* Logo - Solo "Adrián" */}
                     <motion.div
                         className="font-display text-lg md:text-xl font-bold burning-text tracking-tight cursor-pointer"
                         whileHover={{ scale: 1.05 }}
-                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                        onClick={() => scrollToSection('#top')}
                     >
-                        ADRIÁN RODRÍGUEZ DEL RÍO
+                        Adrián
                     </motion.div>
 
-                    {/* Desktop Navigation */}
+                    {/* Desktop Navigation - Orden corregido */}
                     <ul className="hidden md:flex items-center gap-8 font-mono text-xs tracking-widest">
                         {navItems.map((item) => (
                             <li key={item.label}>
@@ -87,12 +97,12 @@ export default function Navbar() {
                         ))}
                     </ul>
 
-                    {/* Connect Button */}
+                    {/* Connect Button - Lleva al terminal en el hero */}
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className="hidden md:block font-mono text-xs tracking-widest text-on-surface bg-surface-container hover:bg-secondary-container border border-primary/50 hover:border-secondary px-6 py-2 rounded-full transition-all duration-300 hover:shadow-[0_0_15px_rgba(236,106,6,0.3)]"
-                        onClick={() => scrollToSection('#contact')}
+                        onClick={() => scrollToSection('#top')}
                     >
                         CONNECT
                     </motion.button>
@@ -132,7 +142,7 @@ export default function Navbar() {
                             ))}
                             <li className="pt-2 border-t border-primary/20">
                                 <button
-                                    onClick={() => scrollToSection('#contact')}
+                                    onClick={() => scrollToSection('#top')}
                                     className="w-full text-center font-mono text-xs tracking-widest bg-secondary-container hover:bg-primary-container border border-secondary/50 px-6 py-3 rounded-full transition-all"
                                 >
                                     CONNECT
