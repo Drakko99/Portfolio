@@ -75,7 +75,7 @@ export default function TechStack() {
     const isInView = useInView(ref, { once: true, margin: '-100px' });
 
     return (
-        <section id="stack" className="min-h-screen flex items-center py-24 px-6 md:px-16 relative">
+        <section id="stack" className="py-24 md:py-32 px-6 md:px-16 relative">
             {/* Neon Strip */}
             <motion.div
                 className="neon-strip top-[15%] h-[70%]"
@@ -87,18 +87,18 @@ export default function TechStack() {
             {/* Section Header */}
             <motion.div
                 ref={ref}
-                className="border-b border-primary/20 pb-4 mb-16"
+                className="border-b border-primary/20 pb-4 mb-12"
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6 }}
             >
-                <h2 className="font-display text-4xl md:text-5xl burning-text">
+                <h2 className="font-display text-3xl md:text-5xl burning-text">
                     TECH_STACK
                 </h2>
             </motion.div>
 
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 w-full max-w-6xl">
-                {/* Languages - Takes 2 columns */}
+                {/* Languages */}
                 <motion.div
                     className="lg:col-span-2 glass-panel p-8 rounded-xl"
                     initial={{ opacity: 0, y: 30 }}
@@ -116,7 +116,7 @@ export default function TechStack() {
                     </div>
                 </motion.div>
 
-                {/* All Tools - Takes 3 columns */}
+                {/* All Tools */}
                 <motion.div
                     className="lg:col-span-3 glass-panel p-8 rounded-xl"
                     initial={{ opacity: 0, y: 30 }}
