@@ -19,7 +19,7 @@ export default function Footer() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
             >
-                BUILT WITH REACT + THREE.JS + LENIS + GSAP
+                BUILT WITH REACT + THREE.JS + FRAMER MOTION
             </motion.div>
         </footer>
     );

@@ -1,108 +1,90 @@
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Lenis from '@studio-freight/lenis';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion, type Variants } from 'framer-motion';
+import { useEffect } from 'react';
 
 import WebGLBackground from './components/WebGLBackground';
 import Navbar from './components/Navbar';
-import HeroSection from './components/HeroSection';
-import ProjectsGallery from './components/ProjectsGallery';
-import ExperienceTimeline from './components/ExperienceTimeline';
-import TechStack from './components/TechStack';
 import FloatingSocialBar from './components/FloatingSocialBar';
 import Footer from './components/Footer';
 
-gsap.registerPlugin(ScrollTrigger);
+import HomePage from './pages/HomePage';
+import ProjectsPage from './pages/ProjectsPage';
+import ExperiencePage from './pages/ExperiencePage';
+import TechStackPage from './pages/TechStackPage';
 
-function App() {
-  const lenisRef = useRef<Lenis | null>(null);
+function AnimatedRoutes() {
+  const location = useLocation();
 
   useEffect(() => {
-    // Initialize Lenis smooth scroll
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Expo out easing like Linear
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-      infinite: false,
-    });
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
-    lenisRef.current = lenis;
+  const routeOrder = ['/', '/projects', '/experience', '/stack'];
 
-    // Connect Lenis to GSAP ScrollTrigger
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
+  const pageVariants: Variants = {
+    initial: (direction: number) => ({
+      x: direction > 0 ? '100%' : '-100%',
+      opacity: 0,
+      rotateY: direction > 0 ? 15 : -15,
+      scale: 0.95,
+    }),
+    animate: {
+      x: 0,
+      opacity: 1,
+      rotateY: 0,
+      scale: 1,
+      transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const },
+    },
+    exit: (direction: number) => ({
+      x: direction > 0 ? '-100%' : '100%',
+      opacity: 0,
+      rotateY: direction > 0 ? -15 : 15,
+      scale: 0.95,
+      transition: { duration: 0.4, ease: [0.55, 0.06, 0.68, 0.19] as const },
+    }),
+  };
 
-    // Section transitions with GSAP + ScrollTrigger
-    gsap.utils.toArray('section').forEach((section, index) => {
-      // Fade in and slide up on scroll
-      gsap.fromTo(section,
-        {
-          opacity: 0.3,
-          y: 50,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: section,
-            start: 'top 80%',
-            end: 'top 50%',
-            toggleActions: 'play none none reverse',
-          },
-        }
-      );
-
-      // Subtle parallax for each section
-      gsap.to(section, {
-        yPercent: -3,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-    });
-
-    // Cleanup
-    return () => {
-      lenis.destroy();
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, []);
+  const getDirection = (): number => {
+    const fromIndex = routeOrder.indexOf((location.state as any)?.from || '/');
+    const toIndex = routeOrder.indexOf(location.pathname);
+    if (fromIndex === -1 || toIndex === -1) return 1;
+    return toIndex > fromIndex ? 1 : -1;
+  };
 
   return (
-    <div className="relative min-h-screen">
-      {/* WebGL Background */}
-      <WebGLBackground />
+    <AnimatePresence mode="wait" initial={false}>
+      <motion.div
+        key={location.pathname}
+        custom={getDirection()}
+        variants={pageVariants}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        className="relative z-10 w-full h-screen overflow-hidden"
+        style={{ perspective: '1500px' }}
+      >
+        <Routes location={location}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/experience" element={<ExperiencePage />} />
+          <Route path="/stack" element={<TechStackPage />} />
+        </Routes>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
 
-      {/* Navigation */}
-      <Navbar />
-
-      {/* Floating Social Bar - Always visible with liquid effect */}
-      <FloatingSocialBar />
-
-      {/* Main Content */}
-      <main className="relative z-10 flex flex-col">
-        <HeroSection />
-        <ProjectsGallery />
-        <ExperienceTimeline />
-        <TechStack />
-      </main>
-
-      {/* Footer */}
-      <Footer />
-    </div>
+function App() {
+  return (
+    <BrowserRouter>
+      <div className="relative w-full h-screen flex flex-col overflow-hidden">
+        <WebGLBackground />
+        <Navbar />
+        <FloatingSocialBar />
+        <AnimatedRoutes />
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 

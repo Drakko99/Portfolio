@@ -1,7 +1,8 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { techStack } from '../data/portfolioData';
-import { FiCode, FiTool } from 'react-icons/fi';
+import { FiCode, FiTool, FiArrowLeft } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 
 function SkillBar({ skill, index }: { skill: typeof techStack.languages[0]; index: number }) {
     const ref = useRef(null);
@@ -54,28 +55,29 @@ function TechChip({ tech, index }: { tech: typeof techStack.allTools[0]; index: 
 
     return (
         <motion.span
-            className={`font-mono text-sm tracking-wider px-4 py-3 rounded-lg glass-panel border ${colorClass} hover:border-secondary transition-all duration-300 cursor-default group flex items-center gap-2`}
+            className={`font-mono text-xs tracking-wider px-3 py-2 rounded-lg glass-panel border ${colorClass} hover:border-secondary transition-all duration-300 cursor-default group flex items-center gap-1.5`}
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: index * 0.04 }}
+            transition={{ delay: index * 0.03 }}
             whileHover={{
                 scale: 1.05,
-                boxShadow: '0 0 20px rgba(236, 106, 6, 0.3)'
+                boxShadow: '0 0 15px rgba(236, 106, 6, 0.3)'
             }}
         >
-            <span className="text-xs opacity-60">{tech.category}</span>
+            <span className="text-[9px] opacity-60">{tech.category}</span>
             <span className="font-semibold">{tech.name}</span>
         </motion.span>
     );
 }
 
-export default function TechStack() {
+export default function TechStackPage() {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: '-100px' });
+    const navigate = useNavigate();
 
     return (
-        <section id="stack" className="py-24 md:py-32 px-6 md:px-16 relative">
+        <section className="min-h-screen py-32 px-6 md:px-16 relative">
             {/* Neon Strip */}
             <motion.div
                 className="neon-strip top-[15%] h-[70%]"
@@ -84,15 +86,28 @@ export default function TechStack() {
                 transition={{ duration: 1 }}
             />
 
+            {/* Back Button */}
+            <motion.button
+                onClick={() => navigate('/')}
+                className="flex items-center gap-2 font-mono text-xs tracking-wider text-on-surface-variant hover:text-secondary mb-8 transition-colors"
+                initial={{ opacity: 0, x: -20 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+            >
+                <FiArrowLeft size={14} /> BACK TO HOME
+            </motion.button>
+
             {/* Section Header */}
             <motion.div
                 ref={ref}
-                className="border-b border-primary/20 pb-4 mb-12"
+                className="border-b border-primary/20 pb-8 mb-16"
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6 }}
             >
-                <h2 className="font-display text-3xl md:text-5xl burning-text">
+                <div className="font-mono text-secondary text-xs tracking-[0.3em] mb-2">
+          // TOOLS & TECHNOLOGIES
+                </div>
+                <h2 className="font-display text-4xl md:text-6xl burning-text mb-2">
                     TECH_STACK
                 </h2>
             </motion.div>
@@ -127,7 +142,7 @@ export default function TechStack() {
                         <FiTool className="text-secondary" size={24} />
                         <h3 className="font-display text-xl font-semibold text-on-surface tracking-wider">FRAMEWORKS & TOOLS</h3>
                     </div>
-                    <div className="flex flex-wrap gap-3">
+                    <div className="flex flex-wrap gap-2.5">
                         {techStack.allTools.map((tech, index) => (
                             <TechChip key={tech.name} tech={tech} index={index} />
                         ))}
