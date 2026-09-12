@@ -77,7 +77,7 @@ export default function TechStackPage() {
     const navigate = useNavigate();
 
     return (
-        <section className="min-h-screen py-32 px-6 md:px-16 relative">
+        <section className="min-h-[var(--page-height)] py-32 px-6 md:px-16 relative">
             {/* Neon Strip */}
             <motion.div
                 className="neon-strip top-[15%] h-[70%]"

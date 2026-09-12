@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion, type Variants } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion, type Variants } from 'framer-motion';
 import { useEffect } from 'react';
 
 import WebGLBackground from './components/WebGLBackground';
@@ -19,49 +19,23 @@ function AnimatedRoutes() {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
-  const routeOrder = ['/', '/projects', '/experience', '/stack'];
+  const reduceMotion = useReducedMotion();
 
   const pageVariants: Variants = {
-    initial: (direction: number) => ({
-      x: direction > 0 ? '100%' : '-100%',
-      opacity: 0,
-      rotateY: direction > 0 ? 15 : -15,
-      scale: 0.95,
-    }),
-    animate: {
-      x: 0,
-      opacity: 1,
-      rotateY: 0,
-      scale: 1,
-      transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const },
-    },
-    exit: (direction: number) => ({
-      x: direction > 0 ? '-100%' : '100%',
-      opacity: 0,
-      rotateY: direction > 0 ? -15 : 15,
-      scale: 0.95,
-      transition: { duration: 0.4, ease: [0.55, 0.06, 0.68, 0.19] as const },
-    }),
-  };
-
-  const getDirection = (): number => {
-    const fromIndex = routeOrder.indexOf((location.state as any)?.from || '/');
-    const toIndex = routeOrder.indexOf(location.pathname);
-    if (fromIndex === -1 || toIndex === -1) return 1;
-    return toIndex > fromIndex ? 1 : -1;
+    initial: { y: 12, opacity: 0 },
+    animate: { y: 0, opacity: 1, transition: { duration: reduceMotion ? 0 : 0.24 } },
+    exit: { opacity: 0, transition: { duration: reduceMotion ? 0 : 0.12 } },
   };
 
   return (
     <AnimatePresence mode="wait" initial={false}>
       <motion.div
         key={location.pathname}
-        custom={getDirection()}
         variants={pageVariants}
-        initial="initial"
+        initial={reduceMotion ? false : 'initial'}
         animate="animate"
-        exit="exit"
-        className="relative z-10 w-full h-screen overflow-hidden"
-        style={{ perspective: '1500px' }}
+        exit={reduceMotion ? undefined : "exit"}
+        className="relative z-10 w-full flex-1 min-h-0"
       >
         <Routes location={location}>
           <Route path="/" element={<HomePage />} />
@@ -77,7 +51,7 @@ function AnimatedRoutes() {
 function App() {
   return (
     <BrowserRouter>
-      <div className="relative w-full h-screen flex flex-col overflow-hidden">
+      <div className="relative w-full min-h-svh flex flex-col overflow-x-clip">
         <WebGLBackground />
         <Navbar />
         <FloatingSocialBar />

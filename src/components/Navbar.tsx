@@ -66,6 +66,11 @@ const itemVariants: Variants = {
 
 export default function Navbar() {
     const location = useLocation();
+    return <NavbarContent key={location.key} />;
+}
+
+function NavbarContent() {
+    const location = useLocation();
 
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -86,12 +91,6 @@ export default function Navbar() {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
-
-    // Cerrar menús al cambiar de página
-    useEffect(() => {
-        setMobileMenuOpen(false);
-        setContactDropdownOpen(false);
-    }, [location]);
 
     // Cerrar Contact al hacer click fuera
     useEffect(() => {
@@ -144,14 +143,14 @@ export default function Navbar() {
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6, ease: 'easeOut' }}
-                className={`fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl rounded-full border backdrop-blur-xl z-50 transition-all duration-300 ${
+                className={`fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-[760px] rounded-full border backdrop-blur-xl z-50 transition-all duration-300 ${
                     scrolled
                         ? 'bg-surface-container-high/80 border-primary/30 shadow-[0_0_30px_rgba(176,45,41,0.2)]'
                         : 'bg-surface-container-high/60 border-primary/20 shadow-[0_0_20px_rgba(176,45,41,0.1)]'
                 }`}
             >
                 {/* Navbar principal */}
-                <div className="flex items-center px-4 sm:px-8 py-3 min-w-0">
+                <div className="flex items-center px-4 sm:px-5 py-1.5 min-w-0">
                     {/* Logo */}
                     <Link
                         to="/"
@@ -162,12 +161,12 @@ export default function Navbar() {
                     </Link>
 
                     {/* Navegación desktop */}
-                    <ul className="hidden md:flex items-center gap-3 flex-1 justify-center min-w-0">
+                    <ul className="hidden md:flex items-center gap-1 flex-1 justify-center min-w-0">
                         {navItems.map((item) => (
                             <li key={item.label}>
                                 <Link
                                     to={item.href}
-                                    className={`inline-flex items-center justify-center whitespace-nowrap px-5 py-2 rounded-full border transition-all duration-300 font-mono text-xs tracking-wider ${
+                                    className={`inline-flex items-center justify-center whitespace-nowrap px-3 py-1.5 rounded-full border transition-all duration-300 font-mono text-sm tracking-wide ${
                                         isActive(item.href)
                                             ? 'text-secondary bg-secondary/10 border-secondary/30'
                                             : 'text-on-surface-variant border-transparent hover:text-secondary hover:bg-primary/10'
@@ -189,7 +188,7 @@ export default function Navbar() {
                             onClick={toggleContact}
                             aria-expanded={contactDropdownOpen}
                             aria-haspopup="true"
-                            className={`relative flex items-center justify-center gap-1.5 w-[112px] px-4 py-2 rounded-full border whitespace-nowrap transition-colors duration-300 font-mono text-xs tracking-wider ${
+                            className={`relative flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full border whitespace-nowrap transition-colors duration-300 font-mono text-sm tracking-wide ${
                                 contactDropdownOpen
                                     ? 'text-secondary bg-secondary/10 border-secondary/30'
                                     : 'text-on-surface-variant border-transparent hover:text-secondary hover:bg-primary/10'

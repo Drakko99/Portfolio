@@ -1,18 +1,18 @@
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Float } from '@react-three/drei';
+import { Float } from '@react-three/drei';
 import * as THREE from 'three';
 import { useRef, useState, useEffect } from 'react';
 
 function PlasmaField() {
     const meshRef = useRef<THREE.Mesh>(null);
-    const [mousePos, setMousePos] = useState(new THREE.Vector2(0, 0));
+    const mousePos = useRef(new THREE.Vector2(0, 0));
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
-            setMousePos(new THREE.Vector2(
+            mousePos.current.set(
                 (e.clientX / window.innerWidth) * 2 - 1,
                 -(e.clientY / window.innerHeight) * 2 + 1
-            ));
+            );
         };
 
         window.addEventListener('mousemove', handleMouseMove);
@@ -23,8 +23,8 @@ function PlasmaField() {
         if (meshRef.current) {
             const time = state.clock.getElapsedTime();
 
-            meshRef.current.rotation.x = mousePos.y * 0.1 + Math.sin(time * 0.2) * 0.05;
-            meshRef.current.rotation.y = mousePos.x * 0.1 + Math.cos(time * 0.3) * 0.05;
+            meshRef.current.rotation.x = mousePos.current.y * 0.1 + Math.sin(time * 0.2) * 0.05;
+            meshRef.current.rotation.y = mousePos.current.x * 0.1 + Math.cos(time * 0.3) * 0.05;
 
             // Subtle pulsing scale
             const pulse = 1 + Math.sin(time * 0.5) * 0.02;
@@ -54,6 +54,7 @@ function ParticleField() {
 
     // Generate random particles
     const particleCount = 200;
+    const [{ positions, colors }] = useState(() => {
     const positions = new Float32Array(particleCount * 3);
     const colors = new Float32Array(particleCount * 3);
 
@@ -68,6 +69,9 @@ function ParticleField() {
         colors[i * 3 + 1] = isRed ? 0.18 : 0.42;   // G
         colors[i * 3 + 2] = isRed ? 0.16 : 0.02;   // B
     }
+
+    return { positions, colors };
+    });
 
     useFrame((state) => {
         if (pointsRef.current) {
@@ -90,15 +94,11 @@ function ParticleField() {
             <bufferGeometry>
                 <bufferAttribute
                     attach="attributes-position"
-                    count={particleCount}
-                    array={positions}
-                    itemSize={3}
+                    args={[positions, 3]}
                 />
                 <bufferAttribute
                     attach="attributes-color"
-                    count={particleCount}
-                    array={colors}
-                    itemSize={3}
+                    args={[colors, 3]}
                 />
             </bufferGeometry>
             <pointsMaterial

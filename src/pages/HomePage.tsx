@@ -236,7 +236,7 @@ export default function HomePage() {
     const navigate = useNavigate();
 
     return (
-        <section className="h-screen relative overflow-hidden">
+        <section className="h-[var(--page-height)] relative overflow-hidden">
             {/* Neon Strip */}
             <motion.div
                 className="neon-strip top-[20%] h-[60%]"

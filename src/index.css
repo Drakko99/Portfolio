@@ -33,11 +33,7 @@
 }
 
 /* Resto de tus estilos personalizados */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* Tailwind Preflight owns the reset inside its base layer. */
 
 body {
   background-color: #0a0000;
@@ -45,6 +41,7 @@ body {
   font-family: 'Space Grotesk', sans-serif;
 }
 
+@layer components {
 .glass-panel {
   background: rgba(42, 10, 10, 0.35);
   backdrop-filter: blur(16px);
@@ -69,6 +66,8 @@ body {
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
+}
+
 }
 
 .burning-text {
@@ -118,3 +117,12 @@ body {
 }
 
 .cursor-blink { animation: blink 1s step-end infinite; }
+
+/* Account for the footer once, instead of adding it below a full viewport. */
+:root { --footer-height: 36px; --page-height: calc(100svh - var(--footer-height)); }
+.site-footer { min-height: var(--footer-height); flex-shrink: 0; width: min(1000px, calc(100% - 48px)); margin-inline: auto; border-top: 1px solid #b02d2933; display: flex; align-items: center; justify-content: center; gap: 24px; position: relative; z-index: 10; font: 9px var(--font-mono); letter-spacing: .05em; color: #e1bfbb99; }
+.site-footer-credit { color: #ec6a06b3; }
+@media (max-width: 767px) {
+    :root { --footer-height: 56px; }
+    .site-footer { flex-direction: column; gap: 4px; padding-block: 8px; text-align: center; font-size: 8px; }
+}

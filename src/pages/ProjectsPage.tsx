@@ -192,7 +192,7 @@ export default function ProjectsPage() {
     const isInView = useInView(ref, { once: true });
 
     return (
-        <section className="h-screen flex flex-col relative px-12 md:px-24 pt-28 pb-8 overflow-y-auto">
+        <section className="h-[var(--page-height)] flex flex-col relative px-12 md:px-24 pt-28 pb-8 overflow-y-auto">
             {/* Neon Strip */}
             <motion.div
                 className="neon-strip top-[15%] h-[70%]"

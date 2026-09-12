@@ -26,7 +26,7 @@ export default function FloatingSocialBar() {
 
             {/* Floating Social Bar - Fixed Right Side */}
             <motion.div
-                className="fixed right-4 md:right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center gap-4"
+                className="fixed right-4 md:right-6 top-1/2 -translate-y-1/2 z-50 hidden xl:flex flex-col items-center gap-4"
                 initial={{ x: 100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 1 }}

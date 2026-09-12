@@ -1,3 +1,5 @@
+import type { MonthDate } from '../utils/timeline';
+
 export const profile = {
     name: 'Adrián Rodríguez del Río',
     handle: '@Drakko99',
@@ -12,6 +14,8 @@ export const experience = [
         company: 'Be Call Group',
         location: 'León, España · Remoto',
         period: 'Jun 2025 - Presente',
+        startDate: '2025-06' as MonthDate,
+        endDate: null,
         duration: '1 año 3 meses',
         description: 'Desarrollo y mantenimiento de sistemas con PHP y bases de datos. Programación full-stack para aplicaciones web empresariales.',
         tech: ['PHP', 'Bases de Datos', 'Full-Stack'],
@@ -23,6 +27,8 @@ export const experience = [
         company: 'Universidad Nacional de Educación a Distancia (UNED)',
         location: 'Ponferrada, España · Remoto',
         period: 'Jul 2025 - Ene 2026',
+        startDate: '2025-07' as MonthDate,
+        endDate: '2026-01' as MonthDate,
         duration: '7 meses',
         description: 'Docente dinamizador en curso de ciberseguridad para las Fuerzas y Cuerpos de Seguridad del Estado. Formación especializada en seguridad informática.',
         tech: ['Ciberseguridad', 'Moodle', 'Formación'],
@@ -34,6 +40,8 @@ export const experience = [
         company: 'INTECCA - UNED',
         location: 'Ponferrada, España · Presencial',
         period: 'Feb 2024 - Feb 2025',
+        startDate: '2024-02' as MonthDate,
+        endDate: '2025-02' as MonthDate,
         duration: '1 año 1 mes',
         description: 'Administración y configuración de servidores (Windows y Linux), garantizando disponibilidad y seguridad. Programación full stack con TypeScript, Laravel e Ionic para la creación y mantenimiento de plataformas educativas.',
         tech: ['TypeScript', 'Laravel', 'Ionic', 'Linux', 'Windows Server'],
@@ -45,6 +53,8 @@ export const experience = [
         company: 'IP Informática Profesional',
         location: 'Ponferrada, España · Presencial',
         period: 'Mar 2020 - Jul 2020',
+        startDate: '2020-03' as MonthDate,
+        endDate: '2020-07' as MonthDate,
         duration: '5 meses',
         description: 'Desarrollo de aplicaciones web y sistemas informáticos. Mantenimiento y optimización de plataformas existentes.',
         tech: ['HTML', 'CSS', 'JavaScript', 'PHP'],
