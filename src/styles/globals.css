@@ -1,0 +1,135 @@
+/* Documento, estructura de página y navegación al contenido. */
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.5;
+}
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+input {
+    -webkit-tap-highlight-color: transparent;
+}
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+button {
+    cursor: pointer;
+}
+a {
+    text-underline-offset: 4px;
+}
+button {
+    font: inherit;
+}
+input {
+    font: inherit;
+}
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+}
+::selection {
+    background: #93000a;
+    color: #eae0e0;
+}
+html {
+    scrollbar-color: #b02d29 var(--bg);
+}
+* {
+    scrollbar-width: thin;
+}
+.app-shell {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    isolation: isolate;
+}
+.app-main {
+    flex: 1;
+    position: relative;
+    min-width: 0;
+    outline: none;
+}
+.route-content {
+    width: 100%;
+}
+.page {
+    width: min(1760px, 100%);
+    margin-inline: auto;
+    min-height: var(--page-height);
+    padding: 100px clamp(20px, 3vw, 56px) 32px;
+}
+.page-header {
+    margin-bottom: 28px;
+    max-width: 760px;
+}
+.page-header h1 {
+    font-size: clamp(32px, 3.5vw, 46px);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.035em;
+    margin: 10px 0 12px;
+}
+.page-header > p:last-child {
+    color: var(--muted);
+    max-width: 62ch;
+}
+.eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.6;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+}
+.burning-text {
+    background: linear-gradient(to right, #690005, #b02d29, #ec6a06, #f9bd22);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+.skip-link {
+    position: fixed;
+    left: 20px;
+    top: 8px;
+    transform: translateY(-160%);
+    padding: 10px 18px;
+    background: var(--accent);
+    color: #190b07;
+    z-index: 100;
+    border-radius: 6px;
+    font-weight: 600;
+}
+.skip-link:focus {
+    transform: none;
+}
+.not-found {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 24px;
+}
+.not-found h1 {
+    font-size: 36px;
+}
+@media (max-width: 899px) {
+    .page {
+        padding-top: 96px;
+    }
+}
+@media (max-width: 700px) {
+    .page-header {
+        margin-bottom: 22px;
+    }
+}
+@media (max-width: 360px) {
+    .page {
+        padding-inline: 16px;
+    }
+}

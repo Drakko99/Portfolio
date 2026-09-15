@@ -2,12 +2,16 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Float } from '@react-three/drei';
 import * as THREE from 'three';
 import { useRef, useState, useEffect } from 'react';
+import { useMediaQuery } from '../hooks/useMediaQuery';
+import { usePageVisibility } from '../hooks/usePageVisibility';
 
+/** Conserva la esfera de malla original y su inclinación según el ratón. */
 function PlasmaField() {
     const meshRef = useRef<THREE.Mesh>(null);
     const mousePos = useRef(new THREE.Vector2(0, 0));
 
     useEffect(() => {
+        /** Convierte las coordenadas del ratón al intervalo de la escena, entre -1 y 1. */
         const handleMouseMove = (e: MouseEvent) => {
             mousePos.current.set(
                 (e.clientX / window.innerWidth) * 2 - 1,
@@ -19,6 +23,7 @@ function PlasmaField() {
         return () => window.removeEventListener('mousemove', handleMouseMove);
     }, []);
 
+    // Las referencias permiten animar la escena sin renderizar de nuevo los componentes.
     useFrame((state) => {
         if (meshRef.current) {
             const time = state.clock.getElapsedTime();
@@ -26,7 +31,7 @@ function PlasmaField() {
             meshRef.current.rotation.x = mousePos.current.y * 0.1 + Math.sin(time * 0.2) * 0.05;
             meshRef.current.rotation.y = mousePos.current.x * 0.1 + Math.cos(time * 0.3) * 0.05;
 
-            // Subtle pulsing scale
+            // El pulso leve evita que la esfera parezca inmóvil al detener el ratón.
             const pulse = 1 + Math.sin(time * 0.5) * 0.02;
             meshRef.current.scale.set(pulse, pulse, pulse);
         }
@@ -49,40 +54,45 @@ function PlasmaField() {
     );
 }
 
-function ParticleField() {
+/** Mantiene los buffers de partículas y actualiza solo sus posiciones. */
+function ParticleField({ count }: { count: number }) {
     const pointsRef = useRef<THREE.Points>(null);
 
-    // Generate random particles
-    const particleCount = 200;
-    const [{ positions, colors }] = useState(() => {
-    const positions = new Float32Array(particleCount * 3);
-    const colors = new Float32Array(particleCount * 3);
+    // Cada partícula reserva tres valores: sus coordenadas o sus canales de color.
+    const [{ positions, colors, initialY }] = useState(() => {
+        const positions = new Float32Array(count * 3);
+        const colors = new Float32Array(count * 3);
+        const initialY = new Float32Array(count);
 
-    for (let i = 0; i < particleCount; i++) {
-        positions[i * 3] = (Math.random() - 0.5) * 15;
-        positions[i * 3 + 1] = (Math.random() - 0.5) * 15;
-        positions[i * 3 + 2] = (Math.random() - 0.5) * 15;
+        for (let i = 0; i < count; i++) {
+            positions[i * 3] = (Math.random() - 0.5) * 15;
+            positions[i * 3 + 1] = (Math.random() - 0.5) * 15;
+            positions[i * 3 + 2] = (Math.random() - 0.5) * 15;
+            initialY[i] = positions[i * 3 + 1];
 
-        // Mix of red and orange particles
-        const isRed = Math.random() > 0.5;
-        colors[i * 3] = isRed ? 0.69 : 0.92;     // R
-        colors[i * 3 + 1] = isRed ? 0.18 : 0.42;   // G
-        colors[i * 3 + 2] = isRed ? 0.16 : 0.02;   // B
-    }
+            // Alterna los tonos originales rojos y naranjas.
+            const isRed = Math.random() > 0.5;
+            colors[i * 3] = isRed ? 0.69 : 0.92;
+            colors[i * 3 + 1] = isRed ? 0.18 : 0.42;
+            colors[i * 3 + 2] = isRed ? 0.16 : 0.02;
+        }
 
-    return { positions, colors };
+        return { positions, colors, initialY };
     });
 
-    useFrame((state) => {
+    useFrame((state, delta) => {
         if (pointsRef.current) {
-            pointsRef.current.rotation.y += 0.0005;
-            pointsRef.current.rotation.x += 0.0002;
+            // Usa segundos, no número de fotogramas, para mantener una velocidad estable.
+            const step = Math.min(delta, 0.1);
+            pointsRef.current.rotation.y += step * 0.03;
+            pointsRef.current.rotation.x += step * 0.012;
 
             const time = state.clock.getElapsedTime();
             const positions = pointsRef.current.geometry.attributes.position.array as Float32Array;
 
-            for (let i = 0; i < particleCount; i++) {
-                positions[i * 3 + 1] += Math.sin(time + i) * 0.002;
+            for (let i = 0; i < count; i++) {
+                // Parte siempre del buffer inicial para evitar deriva acumulada.
+                positions[i * 3 + 1] = initialY[i] + (Math.cos(i) - Math.cos(time + i)) * 0.12;
             }
 
             pointsRef.current.geometry.attributes.position.needsUpdate = true;
@@ -92,14 +102,8 @@ function ParticleField() {
     return (
         <points ref={pointsRef}>
             <bufferGeometry>
-                <bufferAttribute
-                    attach="attributes-position"
-                    args={[positions, 3]}
-                />
-                <bufferAttribute
-                    attach="attributes-color"
-                    args={[colors, 3]}
-                />
+                <bufferAttribute attach="attributes-position" args={[positions, 3]} />
+                <bufferAttribute attach="attributes-color" args={[colors, 3]} />
             </bufferGeometry>
             <pointsMaterial
                 size={0.05}
@@ -113,6 +117,7 @@ function ParticleField() {
     );
 }
 
+/** Desplaza los dos orbes transparentes que dan profundidad al fondo. */
 function GlowOrbs() {
     const orb1Ref = useRef<THREE.Mesh>(null);
     const orb2Ref = useRef<THREE.Mesh>(null);
@@ -145,16 +150,26 @@ function GlowOrbs() {
     );
 }
 
+/** Configura la escena y pausa el renderizado cuando la pestaña deja de verse. */
 export default function WebGLBackground() {
+    const visible = usePageVisibility();
+    const smallScreen = useMediaQuery('(max-width: 700px)');
+    const particleCount = smallScreen ? 100 : 200;
+
     return (
         <div id="webgl-canvas" aria-hidden="true">
-            <Canvas dpr={[1, 1.5]} fallback={null} camera={{ position: [0, 0, 5], fov: 75 }}>
+            <Canvas
+                frameloop={visible ? 'always' : 'never'}
+                dpr={[1, 1.5]}
+                fallback={null}
+                camera={{ position: [0, 0, 5], fov: 75 }}
+            >
                 <ambientLight intensity={0.2} />
                 <pointLight position={[10, 10, 10]} color="#ec6a06" intensity={0.5} />
                 <pointLight position={[-10, -10, -10]} color="#b02d29" intensity={0.3} />
 
                 <PlasmaField />
-                <ParticleField />
+                <ParticleField key={particleCount} count={particleCount} />
                 <GlowOrbs />
             </Canvas>
         </div>

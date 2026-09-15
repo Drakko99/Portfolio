@@ -13,11 +13,16 @@ test('console commands accept spaces and case changes', () => {
 test('console shares the actual project and contact data', () => {
     for (const project of projects) {
         assert.ok(terminalResponse('projects').includes(project.github));
-        if (project.mobileGithub) assert.ok(terminalResponse('projects').includes(project.mobileGithub));
+        if (project.mobileGithub)
+            assert.ok(terminalResponse('projects').includes(project.mobileGithub));
     }
-    for (const address of Object.values(socialLinks)) assert.ok(terminalResponse('contact').includes(address));
+    for (const address of Object.values(socialLinks))
+        assert.ok(terminalResponse('contact').includes(address));
 });
 test('clear resets output and unknown input is returned as text', () => {
     assert.equal(terminalResponse(' CLEAR '), null);
-    assert.equal(terminalResponse('<script>alert(1)</script>'), 'Unknown command: <script>alert(1)</script>. Type help to see available commands.');
+    assert.equal(
+        terminalResponse('<script>alert(1)</script>'),
+        'Unknown command: <script>alert(1)</script>. Type help to see available commands.'
+    );
 });

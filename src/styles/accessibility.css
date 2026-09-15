@@ -1,0 +1,136 @@
+/* Preferencias de contraste y movimiento, aplicadas después del diseño base. */
+
+:root[data-contrast='high'] {
+    --bg: #000;
+    --panel: #080808;
+    --text: #fff;
+    --muted: #eee;
+    --accent: #ffda91;
+    --line: #bbb;
+}
+[data-contrast='high'] .glow-surface::before {
+    display: none;
+}
+[data-contrast='high'] .neon-button::after {
+    display: none;
+}
+[data-contrast='high'] .project-art {
+    display: none;
+}
+[data-contrast='high'] .site-nav {
+    background: #080808;
+    border-color: #bbb;
+    box-shadow: none;
+}
+[data-contrast='high'] .dropdown-panel {
+    background: #080808;
+    border-color: #bbb;
+    box-shadow: none;
+}
+[data-contrast='high'] .glow-surface {
+    background: #080808;
+    border-color: #bbb;
+    box-shadow: none;
+}
+[data-contrast='high'] .timeline-card {
+    background: #080808;
+    border-color: #bbb;
+    box-shadow: none;
+}
+[data-contrast='high'] .burning-text {
+    background: none;
+    color: var(--text);
+}
+[data-contrast='high'] .neon-button.secondary {
+    color: #fff;
+    background: #080808;
+    border-color: #bbb;
+}
+[data-contrast='high'] .tech-tags li {
+    color: #fff;
+    background: #080808;
+    border-color: #bbb;
+}
+[data-motion='off'] * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+}
+[data-motion='off'] *::before {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+}
+[data-motion='off'] *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+}
+[data-motion='off'] .cursor-halo {
+    display: none;
+}
+[data-motion='off'] .glow-surface::before {
+    display: none;
+}
+[data-motion='off'] .neon-button:hover {
+    transform: none;
+}
+[data-motion='off'] .project-card:hover .art-orbit {
+    transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+    .cursor-halo {
+        display: none;
+    }
+}
+@media (forced-colors: active) {
+    .project-art {
+        display: none;
+    }
+    .burning-text {
+        background: none;
+        color: CanvasText;
+    }
+    .neon-button,
+    .site-nav,
+    .glow-surface,
+    .timeline-card {
+        border: 1px solid ButtonText;
+    }
+    .neon-button {
+        color: LinkText;
+        background: Canvas;
+    }
+    .timeline-connector,
+    .timeline-axis,
+    .timeline-range {
+        background: CanvasText;
+        forced-color-adjust: none;
+    }
+}
+[data-contrast='high'] .home-copy h1 {
+    background: none;
+    color: var(--text);
+}
+[data-contrast='high'] .neon-button {
+    color: #fff;
+    background: #080808;
+    border-color: #bbb;
+}
+@media (forced-colors: active) {
+    #webgl-canvas,
+    .cursor-halo {
+        display: none;
+    }
+    .home-copy h1 {
+        background: none;
+        color: CanvasText;
+    }
+}

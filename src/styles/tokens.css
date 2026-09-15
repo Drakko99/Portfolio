@@ -1,0 +1,29 @@
+/* Colores y tipografías compartidos con las utilidades de Tailwind. */
+
+@theme {
+    --color-background: #0a0000;
+    --color-surface: #120505;
+    --color-surface-container: #200808;
+    --color-surface-container-high: #2a0a0a;
+    --color-primary: #b02d29;
+    --color-secondary: #ec6a06;
+    --color-tertiary: #f9bd22;
+    --color-primary-container: #690005;
+    --color-secondary-container: #93000a;
+    --color-on-surface: #eae0e0;
+    --color-on-surface-variant: #e1bfbb;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+}
+:root {
+    color-scheme: dark;
+    --bg: #0a0000;
+    --panel: #120505;
+    --text: #eae0e0;
+    --muted: #e1bfbb;
+    --accent: #ec6a06;
+    --line: #b02d2940;
+    --footer-height: 40px;
+    --page-height: calc(100svh - var(--footer-height));
+}

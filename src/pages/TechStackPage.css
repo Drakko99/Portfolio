@@ -1,0 +1,61 @@
+/* Distribución de las áreas técnicas y sus evidencias. */
+
+.stack-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+.stack-card {
+    padding: 22px 24px;
+}
+.stack-card-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+.surface-icon {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #b02d29;
+    border-radius: 10px;
+    color: var(--accent);
+    background: #ec6a0610;
+    font-size: 20px;
+}
+.stack-card h2 {
+    font-size: 21px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+.stack-card > p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+    max-width: 60ch;
+}
+.stack-languages {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px 30px;
+    margin-top: 22px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+}
+.stack-languages h2 {
+    font-size: 15px;
+}
+.stack-languages .tech-tags {
+    margin: 0;
+}
+@media (max-width: 700px) {
+    .stack-grid {
+        grid-template-columns: 1fr;
+    }
+    .stack-card {
+        padding: 20px;
+    }
+}
