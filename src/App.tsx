@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion, useIsPresent } from 'framer-motion';
 import { forwardRef, useEffect, useRef, type ReactNode } from 'react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import VisualEffects from './components/VisualEffects';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -107,6 +108,7 @@ export default function App() {
                     <Navbar />
                     <AnimatedRoutes />
                     <Footer />
+                    <SpeedInsights />
                 </div>
             </PreferencesProvider>
         </BrowserRouter>
