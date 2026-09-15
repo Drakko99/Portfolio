@@ -7,7 +7,7 @@ import { join } from 'node:path';
 const project = fileURLToPath(new URL('../', import.meta.url));
 const output = await mkdtemp(join(project, '.qa-experience-'));
 try {
-await build({ root: project, configFile: `${project}/vite.config.ts`, logLevel: 'error', build: { ssr: `${project}/src/pages/ExperiencePage.tsx`, outDir: output, emptyOutDir: true, minify: false } });
+await build({ root: project, configFile: `${project}/vite.config.ts`, logLevel: 'error', build: { ssr: `${project}/tests/fixtures/ExperienceHarness.tsx`, outDir: output, emptyOutDir: true, minify: false } });
 process.env.NODE_ENV = 'development';
 const window = new Window();
 window.matchMedia = query => ({ matches: query.includes('prefers-reduced-motion') || query.includes('hover: hover'), media: query, addListener() {}, removeListener() {}, addEventListener() {}, removeEventListener() {} });
@@ -18,7 +18,7 @@ for (const name of ['window','document','navigator','HTMLElement','Element','SVG
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 const { createElement, act } = await import('react');
 const { createRoot } = await import('react-dom/client');
-const { default: Experience } = await import(pathToFileURL(join(output, 'ExperiencePage.js')).href);
+const { default: Experience } = await import(pathToFileURL(join(output, 'ExperienceHarness.js')).href);
 const mount = document.createElement('div'); document.body.append(mount);
 const root = createRoot(mount);
 await act(async () => root.render(createElement(Experience)));

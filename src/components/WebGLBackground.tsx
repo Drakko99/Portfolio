@@ -147,8 +147,8 @@ function GlowOrbs() {
 
 export default function WebGLBackground() {
     return (
-        <div id="webgl-canvas">
-            <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
+        <div id="webgl-canvas" aria-hidden="true">
+            <Canvas dpr={[1, 1.5]} fallback={null} camera={{ position: [0, 0, 5], fov: 75 }}>
                 <ambientLight intensity={0.2} />
                 <pointLight position={[10, 10, 10]} color="#ec6a06" intensity={0.5} />
                 <pointLight position={[-10, -10, -10]} color="#b02d29" intensity={0.3} />

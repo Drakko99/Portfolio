@@ -1,75 +1,48 @@
-# React + TypeScript + Vite
+# Portfolio de Adrián Rodríguez del Río
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + TypeScript + Vite. Interfaz oscura con acentos rojos y ámbar, navegación entre páginas, consola interactiva y cronología profesional.
 
-Currently, two official plugins are available:
+## Ejecutar
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Usa Node 22.18+ o Node 24. Desde esta carpeta:
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm ci
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Abre la dirección que muestre Vite. No requiere claves, cuentas, backend ni variables de entorno.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Comprobar
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm run build
+npm run lint
+npm test
+npm run test:interactions
+npm audit --omit=dev
 ```
+
+`npm test` ejecuta diez pruebas de fechas y comandos. `test:interactions` monta los componentes React reales en Happy DOM y ejecuta comprobaciones semánticas con axe-core. No abre un navegador ni mide posiciones, solapamientos, colores renderizados o rendimiento. Las carpetas temporales de estas pruebas se eliminan al terminar correctamente.
+
+`npm run preview` sirve la compilación de `dist` para una revisión local. Para publicar, sirve `dist` con un alojamiento que redirija las rutas de la SPA a `index.html`: al recargar `/projects`, `/experience` o `/stack`, el servidor debe devolver la aplicación. La configuración actual presupone publicación en la raíz del dominio. Si se publica en una subcarpeta, hay que ajustar tanto `base` de Vite como `basename` del router.
+
+## Paginas
+
+| Contenido | Archivo |
+| --- | --- |
+| Perfil, experiencia, proyectos y redes | `src/data/portfolioData.ts` |
+| Áreas del stack y ejemplos de uso | `src/pages/TechStackPage.tsx` |
+| Apariencia, distribución y puntos de adaptación | `src/index.css` |
+| Posición del eje y tarjetas | `src/pages/ExperiencePage.css` |
+| Fechas, orden y compresión de huecos | `src/utils/timeline.ts` |
+| Respuestas de la consola | `src/utils/terminal.ts` |
+| Rutas, títulos y transiciones | `src/App.tsx` |
+| Menús de contacto, navegación y apariencia | `src/components/Navbar.tsx` |
+
+Las fechas del eje utilizan `startDate` y `endDate` en formato `AAAA-MM`; `null` significa trabajo vigente. `period` es la etiqueta legible de cada tarjeta. Mantén ambos datos coherentes al editar experiencias. El año final del trabajo vigente se calcula automáticamente.
+
+La consola admite `help`, `about`, `skills`, `projects`, `contact` y `clear`. También tiene botones rápidos e historial con flechas. No ejecuta JavaScript ni comandos del sistema.
+
+El menú del icono de ojo permite activar alto contraste, reducir efectos o el halo difuso opcional alrededor del cursor. Las preferencias se guardan en `localStorage` con la clave `drakko-display`; si el almacenamiento no está disponible, la página sigue funcionando. Se respeta además el movimiento reducido del sistema. El cursor del dispositivo permanece visible.
+
