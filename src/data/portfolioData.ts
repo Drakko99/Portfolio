@@ -80,22 +80,6 @@ export const projects: Project[] = [
     },
     {
         id: 2,
-        slug: 'monitorstock',
-        name: 'MonitorStockTS',
-        category: 'AUTOMATION',
-        kind: 'automation',
-        status: 'open-source',
-        description:
-            'A TypeScript tool for checking product availability at regular intervals and reporting changes in the console.',
-        highlights: [
-            'Configurable intervals and matching patterns.',
-            'Scraping with Axios, Cheerio and Playwright.',
-        ],
-        tech: ['TypeScript', 'Node.js', 'Playwright'],
-        github: 'https://github.com/Drakko99/MonitorStockTS',
-    },
-    {
-        id: 3,
         slug: 'game-library',
         name: 'Game Library',
         category: 'WEB + MOBILE',
@@ -112,6 +96,22 @@ export const projects: Project[] = [
         tech: ['NestJS', 'React', 'Next.js', 'React Native', 'Expo', 'MySQL', 'Prisma'],
         github: 'https://github.com/Drakko99/game-library-web',
         mobileGithub: 'https://github.com/Drakko99/game-library-mobile',
+    },
+    {
+        id: 3,
+        slug: 'monitorstock',
+        name: 'MonitorStockTS',
+        category: 'AUTOMATION',
+        kind: 'automation',
+        status: 'open-source',
+        description:
+            'A TypeScript tool for checking product availability at regular intervals and reporting changes in the console.',
+        highlights: [
+            'Configurable intervals and matching patterns.',
+            'Scraping with Axios, Cheerio and Playwright.',
+        ],
+        tech: ['TypeScript', 'Node.js', 'Playwright'],
+        github: 'https://github.com/Drakko99/MonitorStockTS',
     },
     {
         id: 4,
