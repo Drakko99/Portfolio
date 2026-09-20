@@ -1,4 +1,4 @@
-import { profile, projects, socialLinks, techStack } from '../data/portfolioData.ts';
+import { profile, projects, skillAreas, socialLinks, techStack } from '../data/portfolioData.ts';
 /** Devuelve la respuesta del comando; null indica que hay que limpiar la consola. */
 export function terminalResponse(command: string): string | null {
     switch (command.trim().toLowerCase()) {
@@ -7,7 +7,7 @@ export function terminalResponse(command: string): string | null {
         case 'about':
             return `${profile.name}\n${profile.role}\n\n${profile.bio}`;
         case 'skills':
-            return `Languages: ${techStack.languages.map((skill) => skill.name).join(', ')}.\n\nWeb, mobile and systems. Find practical examples on the Stack page.`;
+            return `Languages: ${techStack.languages.map((skill) => skill.name).join(', ')}.\n\n${skillAreas.map((area) => `${area.title}: ${area.tech.join(', ')}`).join('\n')}\n\nFind practical examples and education on the Stack page.`;
         case 'projects':
             return projects
                 .map(

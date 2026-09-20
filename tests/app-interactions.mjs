@@ -128,6 +128,10 @@ try {
     assert.equal(document.querySelectorAll('h1').length, 1);
     assert.ok(document.querySelector('.home-copy'));
     assert.ok(document.querySelector('.home-console'));
+    const resumeLink = document.querySelector('.home-actions a[download]');
+    assert.equal(resumeLink.getAttribute('href'), '/cv/adrian-rodriguez-del-rio.pdf');
+    assert.equal(resumeLink.getAttribute('download'), 'Adrian-Rodriguez-del-Rio-CV.pdf');
+    assert.match(resumeLink.textContent, /Download CV/);
     assert.equal(document.querySelector('.home-page .stack-grid'), null);
     assert.equal(document.documentElement.dataset.motion, 'off');
     assert.notEqual(document.activeElement?.id, 'terminal-input');
@@ -230,6 +234,13 @@ try {
                     .length,
                 1
             );
+        }
+        if (route === '/stack') {
+            assert.equal(document.querySelectorAll('.education-qualification').length, 1);
+            assert.equal(document.querySelectorAll('.education-course').length, 4);
+            assert.match(document.querySelector('.stack-grid').textContent, /MongoDB/);
+            assert.match(document.querySelector('.stack-grid').textContent, /MySQL/);
+            assert.match(document.querySelector('.education-section').textContent, /Adams/);
         }
         await audit(route);
     }

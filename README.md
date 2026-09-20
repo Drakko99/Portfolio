@@ -95,6 +95,36 @@ Los scripts las borran al finalizar, incluso si una comprobación falla. Una int
 
 ## Personalización
 
+### Descargar el CV
+
+El botón **Download CV** de Home utiliza un enlace HTML con el atributo `download`, sin instalar librerías ni cargar el documento al abrir la página.
+
+1. Copia tu PDF definitivo en `public/cv/adrian-rodriguez-del-rio.pdf` (respeta las minúsculas).
+2. Ejecuta `npm run dev` y prueba el botón. El archivo se sirve como `/cv/adrian-rodriguez-del-rio.pdf`; `public` no forma parte de la URL.
+3. Si usas el despliegue automático de GitHub, incluye el PDF en el commit y haz push. Vite lo copiará a `dist/cv/` y Vercel lo publicará.
+
+Esta entrega no incluye un PDF personal: coloca tu versión definitiva antes de publicar. No uses un documento de ejemplo con el nombre del CV. `resume`, en `src/data/portfolioData.ts`, permite cambiar la URL y el nombre de descarga. En Vercel también se envía `Content-Disposition: attachment` para esa ruta.
+
+**Alternativa sin guardar el PDF en GitHub:** crea un almacén público de Vercel Blob desde Storage, sube allí el PDF y cambia `resume.url` por su URL de descarga, con `?download=1` (o `&download=1` si ya contiene parámetros). Para un archivo externo el navegador puede ignorar el atributo HTML `download`; la URL de descarga de Blob envía la cabecera apropiada. No necesitas añadir el SDK de Blob ni colocar tokens en el frontend. El PDF será público para los visitantes aunque no esté en el repositorio. Consulta los límites y costes del servicio antes de elegirlo.
+
+No se puede añadir un archivo persistente a `public/` de un despliegue de GitHub mediante un gestor FTP: debes incluirlo en una nueva compilación o alojarlo separadamente, como en Blob. Si el repositorio es privado, el PDF del repositorio también lo será, pero el archivo servido por la web seguirá siendo público.
+
+### Vercel y recargas de páginas
+
+`vercel.json`, en la raíz junto a `package.json`, envía las rutas de navegación a `index.html`. React Router puede así resolver `/experience`, `/projects` y `/stack` cuando se abren directamente o se recargan, evitando el error `404 NOT_FOUND` de Vercel.
+
+Las rutas de documentos (`/cv/`), recursos (`/assets/`) y métricas (`/_vercel/`) quedan fuera del fallback: un PDF ausente no debe descargarse como HTML. Las rutas desconocidas de la aplicación muestran su propia página de error. Esta SPA devuelve el documento con HTTP 200; no convierte esa pantalla en una respuesta HTTP 404.
+
+Se conserva la integración de **Vercel Speed Insights** del commit `8c68df9d86d4383bcb76d21c0c2f7b26bd7319f0`: dependencia, lockfile y componente en `src/App.tsx`. Mide rendimiento; no sustituye un sistema de estadísticas de visitas. El cambio del enrutado se aplica al hacer un nuevo despliegue.
+
+### Formación y cursos
+
+Stack incluye `EducationSection.tsx`: una titulación DAW y cuatro cursos/certificaciones contrastados con LinkedIn. La titulación ocupa una fila y los cursos se distribuyen en dos columnas en escritorio y una en pantallas pequeñas.
+
+La lista `education` en `src/data/portfolioData.ts` contiene nombre, entidad, fecha y estado. Para añadir formación futura, crea otra entrada con `status: 'in-progress'` cuando la empieces y cambia a `completed` al terminar. No presentes cursos planeados como completados. `credentialUrl` es opcional y solo debe apuntar a una credencial real. Los títulos se muestran traducidos al inglés; las entidades y fechas corresponden al perfil.
+
+Referencias: [Vite en Vercel](https://vercel.com/docs/frameworks/frontend/vite), [Vercel Blob](https://vercel.com/docs/vercel-blob) y [descargas de Blob](https://vercel.com/docs/vercel-blob/using-blob-sdk).
+
 El contenido se edita en `src/data/portfolioData.ts`. Las fechas de experiencia usan `YYYY-MM`; un final `null` representa un empleo vigente. Mantén la etiqueta `period` coherente con las fechas. Cada proyecto distingue su estado de publicación, código abierto o desarrollo.
 
 La paleta está en `src/styles/tokens.css` y las dimensiones de las tarjetas en `src/pages/ExperiencePage.css`. `WebGLBackground.tsx` contiene la escena y `CursorHalo.tsx` el halo. Los efectos respetan las preferencias de accesibilidad; la escena se carga por separado y pausa el renderizado cuando la pestaña está oculta.

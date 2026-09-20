@@ -1,6 +1,6 @@
-import { FiArrowUpRight, FiMapPin } from 'react-icons/fi';
+import { FiArrowUpRight, FiDownload, FiMapPin } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import { profile, socialLinks } from '../data/portfolioData';
+import { profile, resume, socialLinks } from '../data/portfolioData';
 import Terminal from '../components/Terminal';
 /** Presenta el perfil junto a la consola y los enlaces principales. */
 export default function HomePage() {
@@ -23,6 +23,13 @@ export default function HomePage() {
                     <Link className="neon-button" to="/projects">
                         Explore projects <FiArrowUpRight aria-hidden="true" />
                     </Link>
+                    <a
+                        className="neon-button secondary"
+                        href={resume.url}
+                        download={resume.filename}
+                    >
+                        Download CV <FiDownload aria-hidden="true" />
+                    </a>
                     <a className="neon-button secondary" href={`mailto:${socialLinks.email}`}>
                         Let’s talk <FiArrowUpRight aria-hidden="true" />
                     </a>

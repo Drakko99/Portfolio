@@ -1,5 +1,58 @@
 /* Distribución de las áreas técnicas y sus evidencias. */
 
+.education-section {
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+}
+.education-heading h2 {
+    font-family: var(--font-display);
+    font-size: clamp(24px, 2.4vw, 32px);
+    margin-block: 10px;
+}
+.education-heading > p:last-child,
+.education-card > p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+.education-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 22px;
+}
+.education-card {
+    padding: 22px;
+    min-width: 0;
+}
+.education-qualification {
+    grid-column: 1 / -1;
+}
+.education-card-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--accent);
+    margin-bottom: 14px;
+}
+.education-card h3 {
+    font-size: 17px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+.education-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin-top: 8px;
+}
+@media (max-width: 899px) {
+    .education-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 .stack-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));

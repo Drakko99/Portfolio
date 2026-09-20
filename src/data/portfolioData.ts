@@ -1,4 +1,4 @@
-import type { Experience, Profile, Project, SkillArea } from '../types/portfolio';
+import type { EducationItem, Experience, Profile, Project, SkillArea } from '../types/portfolio';
 
 export const profile: Profile = {
     name: 'Adrián Rodríguez del Río',
@@ -17,8 +17,8 @@ export const experience: Experience[] = [
         startDate: '2025-06',
         endDate: null,
         description:
-            'Development and maintenance of PHP and database systems. Full-stack development for business web applications.',
-        tech: ['PHP', 'Databases', 'Full-Stack'],
+            'Full-stack development of business applications with PHP and Laravel, including time tracking and CRM tools. Development and maintenance of MySQL databases.',
+        tech: ['PHP', 'Laravel', 'MySQL', 'Full-Stack'],
     },
     {
         id: 2,
@@ -55,8 +55,8 @@ export const experience: Experience[] = [
         startDate: '2020-03',
         endDate: '2020-07',
         description:
-            'Development of web applications and IT systems. Maintenance and optimisation of existing platforms.',
-        tech: ['HTML', 'CSS', 'JavaScript', 'PHP'],
+            'Creation and maintenance of WordPress websites during my internship, using Elementor and WooCommerce. Responsive layouts, content updates and on-page SEO.',
+        tech: ['WordPress', 'Elementor', 'WooCommerce', 'SEO', 'HTML', 'CSS', 'JavaScript', 'PHP'],
     },
 ];
 
@@ -132,7 +132,17 @@ export const skillAreas: SkillArea[] = [
         title: 'Web development',
         subtitle: 'INTERFACES + LOGIC',
         text: 'Business applications and educational platforms, from user interfaces to business logic.',
-        tech: ['TypeScript', 'PHP', 'Laravel', 'React', 'Next.js', 'NestJS', 'Prisma'],
+        tech: [
+            'HTML',
+            'CSS',
+            'JavaScript',
+            'TypeScript',
+            'PHP',
+            'Laravel',
+            'React',
+            'Next.js',
+            'NestJS',
+        ],
         evidence: 'Explore my development work',
         href: '/projects',
     },
@@ -148,9 +158,9 @@ export const skillAreas: SkillArea[] = [
     {
         id: 'systems',
         title: 'Systems and automation',
-        subtitle: 'INFRASTRUCTURE + DATA',
-        text: 'Windows and Linux server administration, databases and task automation with TypeScript.',
-        tech: ['Linux', 'Windows Server', 'Databases', 'Node.js', 'Playwright'],
+        subtitle: 'INFRASTRUCTURE + AUTOMATION',
+        text: 'Windows and Linux server administration and task automation with TypeScript.',
+        tech: ['Linux', 'Windows Server', 'Node.js', 'Playwright'],
         evidence: 'Explore MonitorStockTS',
         href: '/projects#monitorstock',
     },
@@ -162,6 +172,74 @@ export const skillAreas: SkillArea[] = [
         tech: ['Cybersecurity', 'Moodle', 'Training'],
         evidence: 'View UNED experience',
         href: '/experience',
+    },
+    {
+        id: 'databases',
+        title: 'Databases',
+        subtitle: 'RELATIONAL + DOCUMENT',
+        text: 'MySQL in my current role at Be Call, alongside knowledge of MongoDB. SQLite for local mobile storage and Prisma in Game Library.',
+        tech: ['MySQL', 'MongoDB', 'SQLite', 'Prisma'],
+        evidence: 'View my experience',
+        href: '/experience',
+    },
+    {
+        id: 'cms',
+        title: 'WordPress and SEO',
+        subtitle: 'CONTENT + DISCOVERABILITY',
+        text: 'Website creation and maintenance at IP Informática Profesional, with visual layouts, e-commerce and on-page search optimisation.',
+        tech: ['WordPress', 'Elementor', 'WooCommerce', 'SEO'],
+        evidence: 'View my experience',
+        href: '/experience',
+    },
+];
+
+// El PDF local se sirve desde public/cv. Puede sustituirse por una URL de descarga pública.
+export const resume = {
+    url: '/cv/adrian-rodriguez-del-rio.pdf',
+    filename: 'Adrian-Rodriguez-del-Rio-CV.pdf',
+};
+
+// Formación contrastada con LinkedIn; los nombres se traducen para mantener la interfaz en inglés.
+export const education: EducationItem[] = [
+    {
+        id: 'daw',
+        title: 'Higher Technician in Web Application Development (DAW)',
+        kind: 'qualification',
+        status: 'completed',
+        institution: 'CIFP Ponferrada',
+        period: 'Sep 2018 – Jun 2020',
+    },
+    {
+        id: 'cybersecurity-iot',
+        title: 'Cybersecurity and IoT',
+        kind: 'course',
+        status: 'completed',
+        institution: 'UNED',
+        period: 'Nov 2025',
+    },
+    {
+        id: 'online-tutoring',
+        title: 'Tutoring Courses in Online Learning Environments',
+        kind: 'course',
+        status: 'completed',
+        institution: 'Adams',
+        period: 'Oct 2025',
+    },
+    {
+        id: 'iot-cybersecurity',
+        title: 'IoT and Cybersecurity in Rural Environments: Trends and Best Practices',
+        kind: 'course',
+        status: 'completed',
+        institution: 'UNED',
+        period: 'Jul 2024',
+    },
+    {
+        id: 'digital-marketing-ai',
+        title: 'Digital Marketing and Artificial Intelligence',
+        kind: 'course',
+        status: 'completed',
+        institution: 'UNED',
+        period: 'Jul 2024',
     },
 ];
 

@@ -39,7 +39,7 @@ export interface Project {
     store?: string;
 }
 
-export type SkillAreaId = 'web' | 'mobile' | 'systems' | 'security';
+export type SkillAreaId = 'web' | 'mobile' | 'systems' | 'security' | 'databases' | 'cms';
 
 export interface SkillArea {
     id: SkillAreaId;
@@ -49,4 +49,14 @@ export interface SkillArea {
     tech: string[];
     evidence: string;
     href: string;
+}
+
+export interface EducationItem {
+    id: string;
+    title: string;
+    kind: 'qualification' | 'course';
+    status: 'completed' | 'in-progress';
+    institution?: string;
+    period?: string;
+    credentialUrl?: string;
 }

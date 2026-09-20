@@ -1,15 +1,26 @@
-import { FiArrowUpRight, FiCode, FiDatabase, FiShield, FiSmartphone } from 'react-icons/fi';
+import {
+    FiArrowUpRight,
+    FiCode,
+    FiDatabase,
+    FiShield,
+    FiSmartphone,
+    FiServer,
+    FiLayout,
+} from 'react-icons/fi';
 import type { IconType } from 'react-icons';
 import { Link } from 'react-router-dom';
 import GlowSurface from '../components/GlowSurface';
+import EducationSection from '../components/EducationSection';
 import { skillAreas, techStack } from '../data/portfolioData';
 import type { SkillAreaId } from '../types/portfolio';
 
 const areaIcons: Record<SkillAreaId, IconType> = {
     web: FiCode,
     mobile: FiSmartphone,
-    systems: FiDatabase,
+    systems: FiServer,
     security: FiShield,
+    databases: FiDatabase,
+    cms: FiLayout,
 };
 
 /** Relaciona las áreas técnicas con ejemplos de trabajo y proyectos personales. */
@@ -57,6 +68,7 @@ export default function TechStackPage() {
                     ))}
                 </ul>
             </div>
+            <EducationSection />
         </section>
     );
 }
