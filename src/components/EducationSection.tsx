@@ -9,7 +9,9 @@ export default function EducationSection() {
             <header className="education-heading">
                 <p className="eyebrow">FOUNDATIONS / CONTINUOUS LEARNING</p>
                 <h2 id="education-title">Education & learning</h2>
-                <p>Formal education and complementary training behind my work.</p>
+                <p>
+                    My web development qualification, completed courses and what I’m learning now.
+                </p>
                 <a
                     className="text-link"
                     href={socialLinks.linkedin}
@@ -36,6 +38,7 @@ export default function EducationSection() {
                             </div>
                             <h3>{item.title}</h3>
                             {item.institution && <p>{item.institution}</p>}
+                            {item.instructor && <p>Instructor: {item.instructor}</p>}
                             <p className="education-meta">
                                 {item.period && <span>{item.period}</span>}
                                 <span>

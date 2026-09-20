@@ -1,5 +1,4 @@
 import { FiArrowUpRight, FiDownload, FiMapPin } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
 import { profile, resume, socialLinks } from '../data/portfolioData';
 import Terminal from '../components/Terminal';
 /** Presenta el perfil junto a la consola y los enlaces principales. */
@@ -7,7 +6,7 @@ export default function HomePage() {
     return (
         <section className="page home-page" aria-labelledby="home-title">
             <div className="home-copy">
-                <p className="eyebrow">{profile.handle} / DEVELOPMENT & SYSTEMS</p>
+                <p className="eyebrow">{profile.handle} / FULL-STACK DEVELOPMENT</p>
                 <h1 id="home-title">
                     Adrián
                     <br />
@@ -16,18 +15,11 @@ export default function HomePage() {
                 <p className="home-role">
                     Full-stack developer.
                     <br />
-                    Systems administrator.
+                    Web, mobile and the systems behind them.
                 </p>
                 <p className="home-bio">{profile.bio}</p>
                 <div className="home-actions">
-                    <Link className="neon-button" to="/projects">
-                        Explore projects <FiArrowUpRight aria-hidden="true" />
-                    </Link>
-                    <a
-                        className="neon-button secondary"
-                        href={resume.url}
-                        download={resume.filename}
-                    >
+                    <a className="neon-button" href={resume.url} download={resume.filename}>
                         Download CV <FiDownload aria-hidden="true" />
                     </a>
                     <a className="neon-button secondary" href={`mailto:${socialLinks.email}`}>

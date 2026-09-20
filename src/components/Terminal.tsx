@@ -64,7 +64,7 @@ export default function Terminal() {
         <GlowSurface className="terminal">
             <div className="terminal-chrome">
                 <span>
-                    <FiTerminal aria-hidden="true" /> drakko99@portfolio:~
+                    <FiTerminal aria-hidden="true" /> drakko@portfolio:~
                 </span>
                 <span className="window-dots" aria-hidden="true">
                     <i />
@@ -74,7 +74,7 @@ export default function Terminal() {
             </div>
             <div className="terminal-intro">
                 <span className="eyebrow">INTERACTIVE SHELL</span>
-                <h2>Meet the person behind the code.</h2>
+                <h2>A quick introduction, one command at a time.</h2>
                 <p>
                     Type <code>help</code> or choose a command to get started.
                 </p>

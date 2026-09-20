@@ -21,7 +21,9 @@ export default function ExperiencePage() {
                     PROFESSIONAL / JOURNEY
                 </p>
                 <h1 className="experience-title burning-text">Experience</h1>
-                <p className="experience-intro">Development, systems and shared knowledge.</p>
+                <p className="experience-intro">
+                    My work in software development, systems and technical training.
+                </p>
             </motion.header>
             <div
                 className="timeline-stage"

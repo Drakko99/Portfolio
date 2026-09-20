@@ -95,6 +95,10 @@ Los scripts las borran al finalizar, incluso si una comprobación falla. Una int
 
 ## Personalización
 
+Home prioriza **Download CV** usando el estilo compartido `neon-button`, el mismo que tenía Explore projects, y mantiene **Let’s talk** como acceso secundario al correo. La presentación describe el perfil sin depender de la empresa actual ni repetir la ubicación. Projects sigue disponible en la navegación. El footer comparte los enlaces de correo, LinkedIn y GitHub definidos en los datos, con nombres accesibles para sus iconos.
+
+Projects muestra cuatro proyectos en dos columnas en escritorio y una en móvil. ToDo App se presenta como proyecto de aprendizaje en PHP y MySQL, con enlace a su código. Su API contiene un acceso de desarrollo y requiere revisar autorización por usuario antes de publicarse como servicio real; el portfolio no la ejecuta ni aloja.
+
 ### Descargar el CV
 
 El botón **Download CV** de Home utiliza un enlace HTML con el atributo `download`, sin instalar librerías ni cargar el documento al abrir la página.
@@ -119,7 +123,7 @@ Se conserva la integración de **Vercel Speed Insights** del commit `8c68df9d86d
 
 ### Formación y cursos
 
-Stack incluye `EducationSection.tsx`: una titulación DAW y cuatro cursos/certificaciones contrastados con LinkedIn. La titulación ocupa una fila y los cursos se distribuyen en dos columnas en escritorio y una en pantallas pequeñas.
+Stack incluye `EducationSection.tsx`: una titulación DAW, cuatro cursos/certificaciones contrastados con LinkedIn y el curso de BIG School, impartido por Brais Moure, en curso desde septiembre de 2026. Este último aparece traducido como **AI Development Course: The New Programmer**, manteniendo todos los títulos en inglés. La titulación ocupa una fila y los cursos se distribuyen en dos columnas en escritorio y una en pantallas pequeñas. Las descripciones del stack se centran en conocimientos; la sección de seguridad conserva la referencia al curso INCIBE–UNED para las Fuerzas y Cuerpos de Seguridad del Estado.
 
 La lista `education` en `src/data/portfolioData.ts` contiene nombre, entidad, fecha y estado. Para añadir formación futura, crea otra entrada con `status: 'in-progress'` cuando la empieces y cambia a `completed` al terminar. No presentes cursos planeados como completados. `credentialUrl` es opcional y solo debe apuntar a una credencial real. Los títulos se muestran traducidos al inglés; las entidades y fechas corresponden al perfil.
 

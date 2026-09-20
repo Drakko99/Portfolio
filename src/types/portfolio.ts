@@ -21,8 +21,8 @@ export interface Experience {
     tech: string[];
 }
 
-export type ProjectKind = 'game' | 'automation' | 'library';
-export type ProjectStatus = 'published' | 'open-source' | 'development';
+export type ProjectKind = 'game' | 'automation' | 'library' | 'tasks';
+export type ProjectStatus = 'published' | 'open-source' | 'development' | 'learning';
 
 export interface Project {
     id: number;
@@ -57,6 +57,7 @@ export interface EducationItem {
     kind: 'qualification' | 'course';
     status: 'completed' | 'in-progress';
     institution?: string;
+    instructor?: string;
     period?: string;
     credentialUrl?: string;
 }

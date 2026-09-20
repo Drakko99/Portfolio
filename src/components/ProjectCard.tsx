@@ -1,4 +1,12 @@
-import { FiActivity, FiArrowUpRight, FiGithub, FiGrid, FiPlay, FiUsers } from 'react-icons/fi';
+import {
+    FiActivity,
+    FiArrowUpRight,
+    FiGithub,
+    FiGrid,
+    FiPlay,
+    FiUsers,
+    FiCheckSquare,
+} from 'react-icons/fi';
 import type { IconType } from 'react-icons';
 import type { Project, ProjectKind, ProjectStatus } from '../types/portfolio';
 import GlowSurface from './GlowSurface';
@@ -7,12 +15,14 @@ const projectIcons: Record<ProjectKind, IconType> = {
     game: FiUsers,
     automation: FiActivity,
     library: FiGrid,
+    tasks: FiCheckSquare,
 };
 
 const statusLabels: Record<ProjectStatus, string> = {
     published: 'On Google Play',
     'open-source': 'Open source',
     development: 'In development',
+    learning: 'Learning project',
 };
 
 /** Presenta un proyecto y los destinos que realmente tiene disponibles. */

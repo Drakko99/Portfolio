@@ -11,8 +11,8 @@ export default function ProjectsPage() {
                     Projects<span className="burning-text"> of my own.</span>
                 </h1>
                 <p>
-                    Applications, automation and ideas in progress. Explore the source code and the
-                    thinking behind each project.
+                    Things I’ve built outside work: a published game, automation tools and web
+                    applications. Each project includes its source code and current status.
                 </p>
             </header>
             <div className="projects-grid">

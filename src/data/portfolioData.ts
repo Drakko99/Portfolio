@@ -4,7 +4,7 @@ export const profile: Profile = {
     name: 'Adrián Rodríguez del Río',
     handle: '@Drakko99',
     role: 'Full-Stack Developer // Systems Administrator',
-    bio: 'I build web and mobile applications and manage the systems behind them. I combine full-stack development, automation and experience with educational platforms to create useful, accessible solutions.',
+    bio: 'I’m a full-stack developer with a background in systems administration. I enjoy turning ideas into web and mobile applications, understanding how each part works and finding ways to improve it. I care about clear code, accessibility and building software that people find useful.',
 };
 
 export const experience: Experience[] = [
@@ -31,7 +31,7 @@ export const experience: Experience[] = [
         startDate: '2025-07',
         endDate: '2026-01',
         description:
-            'Teaching and supporting learners on a cybersecurity course for Spanish law enforcement agencies. Specialist training in information security.',
+            'Taught and supported learners on an INCIBE–UNED cybersecurity course for Spanish law enforcement agencies, using Moodle to guide their learning.',
         tech: ['Cybersecurity', 'Moodle', 'Training'],
     },
     {
@@ -43,7 +43,7 @@ export const experience: Experience[] = [
         startDate: '2024-02',
         endDate: '2025-02',
         description:
-            'Administration and configuration of Windows and Linux servers, supporting availability and security. Full-stack development with TypeScript, Laravel and Ionic to build and maintain educational platforms.',
+            'Built and maintained educational web and mobile applications with TypeScript, Laravel and Ionic. Worked on APIs, accessibility with NVDA, and Windows and Linux server administration.',
         tech: ['TypeScript', 'Laravel', 'Ionic', 'Linux', 'Windows Server'],
     },
     {
@@ -69,7 +69,7 @@ export const projects: Project[] = [
         kind: 'game',
         status: 'published',
         description:
-            'A local social deduction game: pass the phone, discover your role and find the impostor.',
+            'A party game played on one phone. Each player checks their word in private, then the group tries to work out who the impostor is.',
         highlights: [
             'Games for 3 to 12 players.',
             'Custom categories and words stored with SQLite.',
@@ -86,7 +86,7 @@ export const projects: Project[] = [
         kind: 'automation',
         status: 'open-source',
         description:
-            'A stock monitor that checks product pages and reports availability through the console.',
+            'A TypeScript tool for checking product availability at regular intervals and reporting changes in the console.',
         highlights: [
             'Configurable intervals and matching patterns.',
             'Scraping with Axios, Cheerio and Playwright.',
@@ -102,7 +102,7 @@ export const projects: Project[] = [
         kind: 'library',
         status: 'development',
         description:
-            'One game library, two interfaces. A web application and a mobile app share a NestJS backend, with MySQL and Prisma powering the data layer.',
+            'A game library I’m building for web and mobile. Both interfaces share a NestJS API and a MySQL database accessed through Prisma.',
         highlights: [
             'Web interface: React and Next.js.',
             'Mobile interface: React Native and Expo.',
@@ -112,6 +112,23 @@ export const projects: Project[] = [
         tech: ['NestJS', 'React', 'Next.js', 'React Native', 'Expo', 'MySQL', 'Prisma'],
         github: 'https://github.com/Drakko99/game-library-web',
         mobileGithub: 'https://github.com/Drakko99/game-library-mobile',
+    },
+    {
+        id: 4,
+        slug: 'todo-app',
+        name: 'ToDo App',
+        category: 'WEB APPLICATION',
+        kind: 'tasks',
+        status: 'learning',
+        description:
+            'A PHP and MySQL task manager, built to practise working with forms, sessions and relational data without a framework.',
+        highlights: [
+            'Create, edit and organise tasks by status and due date.',
+            'Search, sorting, an activity log and webhook integration.',
+            'Includes a REST API for local development and experimentation.',
+        ],
+        tech: ['PHP', 'MySQL', 'JavaScript', 'HTML', 'CSS'],
+        github: 'https://github.com/Drakko99/todo_app',
     },
 ];
 
@@ -131,7 +148,7 @@ export const skillAreas: SkillArea[] = [
         id: 'web',
         title: 'Web development',
         subtitle: 'INTERFACES + LOGIC',
-        text: 'Business applications and educational platforms, from user interfaces to business logic.',
+        text: 'Web applications and APIs, from responsive interfaces to business logic and backend services.',
         tech: [
             'HTML',
             'CSS',
@@ -150,7 +167,7 @@ export const skillAreas: SkillArea[] = [
         id: 'mobile',
         title: 'Mobile applications',
         subtitle: 'IDEA → APPLICATION',
-        text: 'Mobile experiences with customisable content and local persistence.',
+        text: 'Cross-platform mobile applications with customisable content, local storage and interfaces designed for touch.',
         tech: ['Flutter', 'Dart', 'Ionic', 'SQLite', 'React Native', 'Expo'],
         evidence: 'Explore Juego del Impostor',
         href: '/projects#juego-impostor',
@@ -159,7 +176,7 @@ export const skillAreas: SkillArea[] = [
         id: 'systems',
         title: 'Systems and automation',
         subtitle: 'INFRASTRUCTURE + AUTOMATION',
-        text: 'Windows and Linux server administration and task automation with TypeScript.',
+        text: 'Windows and Linux server administration, scripting and task automation with TypeScript and Node.js.',
         tech: ['Linux', 'Windows Server', 'Node.js', 'Playwright'],
         evidence: 'Explore MonitorStockTS',
         href: '/projects#monitorstock',
@@ -168,7 +185,7 @@ export const skillAreas: SkillArea[] = [
         id: 'security',
         title: 'Security and teaching',
         subtitle: 'SHARED KNOWLEDGE',
-        text: 'Teaching and facilitating the INCIBE–UNED cybersecurity course for Spanish law enforcement agencies.',
+        text: 'Teaching and supporting learners on the INCIBE–UNED cybersecurity course for Spanish law enforcement agencies, using Moodle.',
         tech: ['Cybersecurity', 'Moodle', 'Training'],
         evidence: 'View UNED experience',
         href: '/experience',
@@ -177,7 +194,7 @@ export const skillAreas: SkillArea[] = [
         id: 'databases',
         title: 'Databases',
         subtitle: 'RELATIONAL + DOCUMENT',
-        text: 'MySQL in my current role at Be Call, alongside knowledge of MongoDB. SQLite for local mobile storage and Prisma in Game Library.',
+        text: 'Relational data with MySQL and SQLite, knowledge of document databases with MongoDB, and application data access through Prisma.',
         tech: ['MySQL', 'MongoDB', 'SQLite', 'Prisma'],
         evidence: 'View my experience',
         href: '/experience',
@@ -186,7 +203,7 @@ export const skillAreas: SkillArea[] = [
         id: 'cms',
         title: 'WordPress and SEO',
         subtitle: 'CONTENT + DISCOVERABILITY',
-        text: 'Website creation and maintenance at IP Informática Profesional, with visual layouts, e-commerce and on-page search optimisation.',
+        text: 'WordPress website creation and maintenance, visual layouts with Elementor, e-commerce with WooCommerce and on-page SEO.',
         tech: ['WordPress', 'Elementor', 'WooCommerce', 'SEO'],
         evidence: 'View my experience',
         href: '/experience',
@@ -208,6 +225,15 @@ export const education: EducationItem[] = [
         status: 'completed',
         institution: 'CIFP Ponferrada',
         period: 'Sep 2018 – Jun 2020',
+    },
+    {
+        id: 'ai-development',
+        title: 'AI Development Course: The New Programmer',
+        kind: 'course',
+        status: 'in-progress',
+        institution: 'BIG School',
+        instructor: 'Brais Moure',
+        period: 'Sep 2026 – Present',
     },
     {
         id: 'cybersecurity-iot',

@@ -221,11 +221,46 @@
 }
 
 @media (min-width: 1100px) {
+    .experience-page {
+        --timeline-inset: clamp(20px, 2vw, 40px);
+        width: min(2048px, 100%);
+        padding-inline: var(--timeline-inset);
+    }
+    .career-timeline {
+        --card-width: clamp(260px, 22vw, 320px);
+        --lane-height: clamp(200px, calc((100svh - 300px) / 2 - 44px), 360px);
+        /* Alarga el eje sin consumir más espacio que el margen exterior disponible. */
+        margin-inline: calc(var(--card-width) / 2 - min(32px, var(--timeline-inset)));
+    }
+    .timeline-axis {
+        height: 6px;
+        border-radius: 3px;
+    }
+    .timeline-range {
+        height: 6px;
+    }
+    .is-top .timeline-range {
+        top: -9px;
+    }
+    .is-bottom .timeline-range {
+        top: 9px;
+    }
+    .timeline-year {
+        font-size: 12px;
+    }
+    .timeline-description {
+        font-size: 13px;
+        line-height: 1.65;
+    }
+    .timeline-period,
+    .timeline-toggle {
+        font-size: 12px;
+    }
     .timeline-card {
-        padding: 16px;
+        padding: 18px;
     }
     .timeline-card-title {
-        font-size: 16px;
+        font-size: 18px;
     }
     .timeline-company {
         font-size: 13px;

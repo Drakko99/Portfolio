@@ -461,7 +461,33 @@
     border-top: 1px solid var(--line);
     color: var(--muted);
     font-size: 11px;
-    padding-block: 9px;
+    padding-block: 0;
+}
+.footer-contact {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+}
+.footer-contact a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    color: var(--muted);
+    font-size: 17px;
+    transition:
+        color 180ms,
+        background 180ms,
+        box-shadow 180ms;
+}
+.footer-contact a:hover,
+.footer-contact a:focus-visible {
+    color: var(--accent);
+    background: #ec6a0612;
+    box-shadow: 0 0 14px #ec6a061c;
 }
 @media (max-width: 899px) {
     .terminal-log {
@@ -482,11 +508,10 @@
     .contact-trigger {
         padding-inline: 9px;
     }
-    .footer-note {
-        display: none;
-    }
     .site-footer {
-        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0 12px;
+        justify-content: space-between;
     }
 }
 @media (max-width: 360px) {

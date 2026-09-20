@@ -132,6 +132,19 @@ try {
     assert.equal(resumeLink.getAttribute('href'), '/cv/adrian-rodriguez-del-rio.pdf');
     assert.equal(resumeLink.getAttribute('download'), 'Adrian-Rodriguez-del-Rio-CV.pdf');
     assert.match(resumeLink.textContent, /Download CV/);
+    assert.equal(document.querySelector('.home-actions a'), resumeLink);
+    assert.equal(resumeLink.className, 'neon-button');
+    assert.match(
+        document.querySelector('.home-actions a[href^="mailto:"]').textContent,
+        /Let’s talk/
+    );
+    assert.doesNotMatch(document.querySelector('.home-bio').textContent, /Ponferrada|Be Call/);
+    assert.equal(document.querySelector('.home-actions a[href="/projects"]'), null);
+    assert.equal(document.querySelectorAll('.footer-contact a').length, 3);
+    for (const link of document.querySelectorAll('.footer-contact a')) {
+        assert.ok(link.getAttribute('aria-label'));
+        assert.ok(link.getAttribute('href'));
+    }
     assert.equal(document.querySelector('.home-page .stack-grid'), null);
     assert.equal(document.documentElement.dataset.motion, 'off');
     assert.notEqual(document.activeElement?.id, 'terminal-input');
@@ -224,10 +237,11 @@ try {
                 document.querySelector('a[href="https://github.com/Drakko99/game-library-mobile"]')
             );
             assert.equal(document.querySelector('.project-links button').disabled, true);
-            assert.equal(document.querySelectorAll('.project-card').length, 3);
+            assert.equal(document.querySelectorAll('.project-card').length, 4);
+            assert.ok(document.querySelector('a[href="https://github.com/Drakko99/todo_app"]'));
             assert.equal(
                 document.querySelectorAll('.project-links a[href^="https://github.com/"]').length,
-                4
+                5
             );
             assert.equal(
                 document.querySelectorAll('.project-links a[href^="https://play.google.com/"]')
@@ -237,7 +251,17 @@ try {
         }
         if (route === '/stack') {
             assert.equal(document.querySelectorAll('.education-qualification').length, 1);
-            assert.equal(document.querySelectorAll('.education-course').length, 4);
+            assert.equal(document.querySelectorAll('.education-course').length, 5);
+            const aiCourse = [...document.querySelectorAll('.education-course')].find((card) =>
+                card.textContent.includes('BIG School')
+            );
+            assert.ok(aiCourse);
+            assert.match(aiCourse.textContent, /Brais Moure/);
+            assert.match(aiCourse.textContent, /In progress/);
+            assert.equal(
+                aiCourse.querySelector('h3').textContent,
+                'AI Development Course: The New Programmer'
+            );
             assert.match(document.querySelector('.stack-grid').textContent, /MongoDB/);
             assert.match(document.querySelector('.stack-grid').textContent, /MySQL/);
             assert.match(document.querySelector('.education-section').textContent, /Adams/);

@@ -32,7 +32,7 @@ export default function TechStackPage() {
                 <h1>
                     My <span className="burning-text">stack.</span>
                 </h1>
-                <p>Technologies connected to the problems they help solve.</p>
+                <p>The tools I use at work, in personal projects and as I keep learning.</p>
             </header>
             <div className="stack-grid">
                 {skillAreas.map(({ id, title, subtitle, text, tech, evidence, href }) => {
