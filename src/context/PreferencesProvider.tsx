@@ -1,7 +1,7 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { MotionConfig, useReducedMotion } from 'framer-motion';
 import { PreferencesContext, type Preferences } from './preferences';
-const defaults: Preferences = { contrast: false, calm: false, halo: false };
+const defaults: Preferences = { contrast: false, calm: false, halo: true };
 
 /** Recupera solo los valores booleanos reconocidos; tolera almacenamiento bloqueado o inválido. */
 function readPreferences(): Preferences {
@@ -10,7 +10,7 @@ function readPreferences(): Preferences {
         return {
             contrast: saved?.contrast === true,
             calm: saved?.calm === true,
-            halo: saved?.halo === true,
+            halo: typeof saved?.halo === 'boolean' ? saved.halo : defaults.halo,
         };
     } catch {
         return { ...defaults };
