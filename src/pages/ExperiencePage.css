@@ -137,7 +137,6 @@
 }
 .is-bottom .timeline-range {
     top: 6px;
-    background: #b02d29;
 }
 .timeline-card {
     max-height: var(--lane-height);
@@ -229,11 +228,10 @@
     .career-timeline {
         --card-width: clamp(260px, 22vw, 320px);
         --lane-height: clamp(200px, calc((100svh - 300px) / 2 - 44px), 360px);
-        /* Alarga el eje sin consumir más espacio que el margen exterior disponible. */
         margin-inline: calc(var(--card-width) / 2 - min(32px, var(--timeline-inset)));
     }
     .timeline-axis {
-        height: 6px;
+        height: 7px;
         border-radius: 3px;
     }
     .timeline-range {
