@@ -64,7 +64,7 @@ export default function Terminal() {
         <GlowSurface className="terminal">
             <div className="terminal-chrome">
                 <span>
-                    <FiTerminal aria-hidden="true" /> drakko@portfolio:~
+                    <FiTerminal aria-hidden="true" /> drakko99@portfolio:~
                 </span>
                 <span className="window-dots" aria-hidden="true">
                     <i />
