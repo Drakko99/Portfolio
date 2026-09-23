@@ -79,11 +79,20 @@
     background: none;
     color: inherit;
 }
-/* En escritorio Home ocupa exactamente la pantalla disponible. */
-@media (min-width: 900px) {
+/* Escritorio con suficiente altura: Home ocupa exactamente el viewport. */
+@media (min-width: 900px) and (min-height: 650px) {
     .home-page {
         height: var(--page-height);
         min-height: 0;
         overflow: clip;
+    }
+}
+
+/* Pantallas anchas pero bajas: permitimos que Home crezca y haga scroll. */
+@media (min-width: 900px) and (max-height: 649px) {
+    .home-page {
+        height: auto;
+        min-height: var(--page-height);
+        overflow: visible;
     }
 }
