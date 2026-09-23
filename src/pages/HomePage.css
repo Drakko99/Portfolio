@@ -79,3 +79,11 @@
     background: none;
     color: inherit;
 }
+/* En escritorio Home ocupa exactamente la pantalla disponible. */
+@media (min-width: 900px) {
+    .home-page {
+        height: var(--page-height);
+        min-height: 0;
+        overflow: clip;
+    }
+}
