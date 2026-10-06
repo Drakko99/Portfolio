@@ -210,13 +210,13 @@ export const skillAreas: SkillArea[] = [
     },
 ];
 
-// El PDF local se sirve desde public/cv. Puede sustituirse por una URL de descarga pública.
+// El PDF local se saca desde public/cv. Puede sustituirse por una URL de descarga pública.
 export const resume = {
     url: '/cv/adrian-rodriguez-del-rio.pdf',
     filename: 'Adrian-Rodriguez-del-Rio-CV.pdf',
 };
 
-// Formación contrastada con LinkedIn; los nombres se traducen para mantener la interfaz en inglés.
+// Formación.
 export const education: EducationItem[] = [
     {
         id: 'daw',
@@ -230,10 +230,10 @@ export const education: EducationItem[] = [
         id: 'ai-development',
         title: 'AI Development Course: The New Programmer',
         kind: 'course',
-        status: 'in-progress',
+        status: 'completed',
         institution: 'BIG School',
         instructor: 'Brais Moure',
-        period: 'Sep 2026 – Present',
+        period: 'Oct 2026',
     },
     {
         id: 'cybersecurity-iot',
