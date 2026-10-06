@@ -73,6 +73,8 @@ export const projects: Project[] = [
         highlights: [
             'Games for 3 to 12 players.',
             'Custom categories and words stored with SQLite.',
+            'Interface created using Flutter.',
+            'Over 1,000 downloads and a five-star rating.',
         ],
         tech: ['Flutter', 'Dart', 'SQLite'],
         github: 'https://github.com/Drakko99/juego_impostor',
