@@ -31,27 +31,57 @@ function NotFound() {
     );
 }
 /** Anima la página y desactiva su interacción mientras abandona la vista. */
-const PageTransition = forwardRef<HTMLDivElement, { children: ReactNode }>(function PageTransition(
-    { children },
-    ref
-) {
+const PageTransition = forwardRef<
+    HTMLDivElement,
+    { children: ReactNode }
+>(function PageTransition({ children }, ref) {
     const present = useIsPresent();
     const { reduceMotion } = usePreferences();
+
     return (
         <motion.div
             ref={ref}
             inert={!present}
             aria-hidden={!present || undefined}
-            initial={reduceMotion ? false : { opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: reduceMotion ? 0 : 0.22 }}
+
+            initial={
+                reduceMotion
+                    ? false
+                    : {
+                        opacity: 0,
+                        scale: 1.06,
+                        filter: "blur(8px)",
+                    }
+            }
+            animate={{
+                opacity: 1,
+                scale: 1,
+                filter: "blur(0px)",
+            }}
+            exit={
+                reduceMotion
+                    ? { opacity: 0 }
+                    : {
+                        opacity: 0,
+                        scale: 0.94,
+                        filter: "blur(8px)",
+                    }
+            }
+            transition={{
+                duration: reduceMotion ? 0 : 0.5,
+                ease: [0.22, 1, 0.36, 1],
+            }}
+            style={{
+                transformOrigin: "center center",
+            }}
+
             className="route-content"
         >
             {children}
         </motion.div>
     );
 });
+
 /** Coordina rutas, títulos, foco de teclado y enlaces a secciones de una página. */
 function AnimatedRoutes() {
     const location = useLocation();
@@ -82,7 +112,7 @@ function AnimatedRoutes() {
     }, [location.key, location.hash]);
     return (
         <main ref={main} id="main-content" tabIndex={-1} className="app-main">
-            <AnimatePresence initial={false} mode="popLayout">
+            <AnimatePresence initial={false} mode="wait">
                 <PageTransition key={location.pathname}>
                     <Routes location={location}>
                         <Route path="/" element={<HomePage />} />
