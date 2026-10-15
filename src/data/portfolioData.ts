@@ -274,5 +274,5 @@ export const education: EducationItem[] = [
 export const socialLinks = {
     github: 'https://github.com/Drakko99',
     linkedin: 'https://www.linkedin.com/in/adrián-rodríguez-del-río-15446b2bb/',
-    email: 'adrianrdr17@gmail.com',
+    email: 'contact@drakko.dev',
 };
