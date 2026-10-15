@@ -4,7 +4,7 @@ export const profile: Profile = {
     name: 'Adrián Rodríguez del Río',
     handle: '@Drakko99',
     role: 'Full-Stack Developer // Systems Administrator',
-    bio: 'I’m a full-stack developer with a background in systems administration. I enjoy turning ideas into web and mobile applications, understanding how each part works and finding ways to improve it. I care about clear code, accessibility and building software that people find useful.',
+    bio: 'I’m a full-stack developer with experience in systems administration. I enjoy transforming ideas and problems into web and mobile applications, understanding how they work, and finding ways to improve them. I care about clean code, accessibility, and create software that people find useful.',
 };
 
 export const experience: Experience[] = [

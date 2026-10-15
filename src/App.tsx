@@ -12,12 +12,14 @@ import ExperiencePage from './pages/ExperiencePage';
 import TechStackPage from './pages/TechStackPage';
 import PreferencesProvider from './context/PreferencesProvider';
 import { usePreferences } from './context/preferences';
+
 const titles: Record<string, string> = {
     '/': 'Full-stack development and systems',
     '/projects': 'Projects',
     '/experience': 'Experience',
     '/stack': 'Stack',
 };
+
 /** Ofrece una salida hacia el inicio cuando la ruta no existe. */
 function NotFound() {
     return (
@@ -30,6 +32,7 @@ function NotFound() {
         </section>
     );
 }
+
 /** Anima la página y desactiva su interacción mientras abandona la vista. */
 const PageTransition = forwardRef<
     HTMLDivElement,
@@ -49,30 +52,80 @@ const PageTransition = forwardRef<
                     ? false
                     : {
                         opacity: 0,
-                        scale: 1.06,
-                        filter: "blur(8px)",
+                        scale: 1.04,
+                        filter: "blur(6px)",
                     }
             }
+
             animate={{
                 opacity: 1,
                 scale: 1,
                 filter: "blur(0px)",
+                transition: reduceMotion
+                    ? {
+                        duration: 0,
+                    }
+                    : {
+                        opacity: {
+                            duration: 0.8,
+                            ease: [0.22, 1, 0.36, 1],
+                        },
+                        scale: {
+                            duration: 0.8,
+                            ease: [0.22, 1, 0.36, 1],
+                        },
+                        filter: {
+                            duration: 0.8,
+                            ease: [0.22, 1, 0.36, 1],
+                        },
+                    },
             }}
+
             exit={
                 reduceMotion
-                    ? { opacity: 0 }
+                    ? {
+                        opacity: 0,
+                        transition: {
+                            duration: 0,
+                        },
+                    }
                     : {
                         opacity: 0,
-                        scale: 0.94,
+                        scale: 0.96,
                         filter: "blur(8px)",
+                        transition: {
+                            opacity: {
+                                duration: 0.8,
+                                ease: [0.4, 0, 0.2, 1],
+                            },
+                            scale: {
+                                duration: 0.8,
+                                ease: [0.22, 1, 0.36, 1],
+                            },
+                            filter: {
+                                duration: 0.8,
+                                ease: [0.22, 1, 0.36, 1],
+                            },
+                        },
                     }
             }
-            transition={{
-                duration: reduceMotion ? 0 : 0.5,
-                ease: [0.22, 1, 0.36, 1],
-            }}
+
             style={{
                 transformOrigin: "center center",
+
+                position: present ? "relative" : "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+
+                zIndex: present ? 1 : 2,
+
+                ...(present
+                    ? {}
+                    : {
+                        height: "100%",
+                        overflow: "hidden",
+                    }),
             }}
 
             className="route-content"
@@ -112,7 +165,7 @@ function AnimatedRoutes() {
     }, [location.key, location.hash]);
     return (
         <main ref={main} id="main-content" tabIndex={-1} className="app-main">
-            <AnimatePresence initial={false} mode="wait">
+            <AnimatePresence initial={false} mode="sync">
                 <PageTransition key={location.pathname}>
                     <Routes location={location}>
                         <Route path="/" element={<HomePage />} />
@@ -126,6 +179,7 @@ function AnimatedRoutes() {
         </main>
     );
 }
+
 /** Monta la estructura compartida y proporciona las preferencias a todas las páginas. */
 export default function App() {
     return (
