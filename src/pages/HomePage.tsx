@@ -1,6 +1,14 @@
-import { FiArrowUpRight, FiDownload, FiMapPin } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+import { FiArrowUpRight, FiBriefcase, FiDownload, FiGrid, FiLayers, FiMapPin } from 'react-icons/fi';
 import { profile, resume, socialLinks } from '../data/portfolioData';
 import Terminal from '../components/Terminal';
+
+const sectionLinks = [
+    { label: 'Projects', to: '/projects', Icon: FiGrid },
+    { label: 'Experience', to: '/experience', Icon: FiBriefcase },
+    { label: 'Stack', to: '/stack', Icon: FiLayers },
+];
+
 /** Presenta el perfil junto a la consola y los enlaces principales. */
 export default function HomePage() {
     return (
@@ -26,6 +34,15 @@ export default function HomePage() {
                         Let’s talk <FiArrowUpRight aria-hidden="true" />
                     </a>
                 </div>
+
+                <nav className="home-section-nav" aria-label="Explore portfolio">
+                    {sectionLinks.map(({ label, to, Icon }) => (
+                        <Link key={to} className="home-section-link" to={to}>
+                            <Icon aria-hidden="true" />
+                            <span>{label}</span>
+                        </Link>
+                    ))}
+                </nav>
                 <p className="home-location">
                     <FiMapPin aria-hidden="true" /> Ponferrada, Spain{' '}
                     <span aria-hidden="true">·</span> Web, mobile and systems
