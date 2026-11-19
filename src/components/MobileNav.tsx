@@ -38,7 +38,8 @@ export default function MobileNav() {
                         reduceMotion
                             ? { duration: 0 }
                             : {
-                                x: { type: 'spring', stiffness: 380, damping: 28, mass: 0.85 },
+                                //Reducir stiffness hace el desplazamiento más pausado, reducir damping aumenta el rebote.
+                                x: { type: 'spring', stiffness: 200, damping: 28, mass: 2 },
                                 opacity: { duration: 0.16 },
                             }
                     }
