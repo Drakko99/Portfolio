@@ -6,4 +6,5 @@
 @import './pages/ProjectsPage.css';
 @import './pages/TechStackPage.css';
 @import './pages/ExperiencePage.css';
+@import './styles/mobile-nav.css';
 @import './styles/accessibility.css';

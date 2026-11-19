@@ -8,6 +8,8 @@ import { join } from 'node:path';
 const project = fileURLToPath(new URL('../', import.meta.url));
 const output = await mkdtemp(join(project, '.qa-app-'));
 let root, window, act;
+let mobileViewport = false;
+const mobileMediaListeners = new Set();
 try {
     await build({
         root: project,
@@ -18,12 +20,25 @@ try {
     process.env.NODE_ENV = 'development';
     window = new Window({ url: 'http://localhost/' });
     window.matchMedia = (query) => ({
-        matches: query.includes('hover: hover'),
+        get matches() {
+            return (
+                query.includes('hover: hover') ||
+                (query === '(max-width: 700px)' && mobileViewport)
+            );
+        },
         media: query,
         addListener() {},
         removeListener() {},
-        addEventListener() {},
-        removeEventListener() {},
+        addEventListener(type, listener) {
+            if (type === 'change' && query === '(max-width: 700px)') {
+                mobileMediaListeners.add(listener);
+            }
+        },
+        removeEventListener(type, listener) {
+            if (type === 'change' && query === '(max-width: 700px)') {
+                mobileMediaListeners.delete(listener);
+            }
+        },
     });
     window.document.documentElement.lang = 'en';
     window.localStorage.setItem('drakko-display', JSON.stringify({ calm: true }));
@@ -268,11 +283,30 @@ try {
         }
         await audit(route);
     }
-    await press(document.querySelector('[aria-label="Open navigation"]'), 'ArrowDown');
-    assert.equal(document.querySelectorAll('[role=menuitem]').length, 4);
-    await click(document.querySelector('[role=menuitem][href="/stack"]'));
+        // La barra inferior se monta únicamente cuando coincide la consulta móvil.
+    assert.equal(document.querySelector('.mobile-nav'), null);
+
+    await interact(() => {
+        mobileViewport = true;
+        for (const notify of mobileMediaListeners) notify();
+    });
+
+    assert.equal(document.querySelectorAll('.mobile-nav a').length, 4);
+    assert.ok(
+        document.querySelector('.mobile-nav a[href="/experience"][aria-current="page"]')
+    );
+
+    await click(document.querySelector('.mobile-nav a[href="/stack"]'));
     assert.equal(window.location.pathname, '/stack');
-    assert.equal(document.querySelector('[role=menu]'), null);
+    assert.ok(document.querySelector('.mobile-nav a[href="/stack"][aria-current="page"]'));
+    assert.equal(document.activeElement.id, 'main-content');
+
+    await interact(() => {
+        mobileViewport = false;
+        for (const notify of mobileMediaListeners) notify();
+    });
+
+    assert.equal(document.querySelector('.mobile-nav'), null);
     await click(document.querySelector('a[href="/projects#juego-impostor"]'));
     assert.equal(window.location.hash, '#juego-impostor');
     assert.ok(document.getElementById('juego-impostor'));
@@ -292,7 +326,7 @@ try {
     await click(document.querySelector('.not-found a'));
     assert.equal(window.location.pathname, '/');
     console.log(
-        'PASS: all routes, titles, focus, repo/store links, mobile menu, hash links, invalid fragment and 404 recovery. No browser layout assertions.'
+        'PASS: all routes, titles, focus, repo/store links, mobile navigation, hash links, invalid fragment and 404 recovery. No browser layout assertions.'
     );
 } finally {
     if (root && act) await act(async () => root.unmount());

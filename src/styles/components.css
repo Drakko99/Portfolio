@@ -134,9 +134,6 @@
     padding: 10px;
     font-size: 18px;
 }
-.mobile-menu {
-    display: none;
-}
 .dropdown-panel {
     z-index: 80;
     min-width: 230px;
@@ -502,9 +499,6 @@
     }
     .desktop-links {
         display: none;
-    }
-    .mobile-menu {
-        display: block;
     }
     .contact-trigger {
         padding-inline: 9px;

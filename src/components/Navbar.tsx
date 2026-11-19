@@ -8,10 +8,10 @@ import {
     FiGithub,
     FiLinkedin,
     FiMail,
-    FiMenu,
 } from 'react-icons/fi';
 import { socialLinks } from '../data/portfolioData';
 import { usePreferences } from '../context/preferences';
+import MobileNav from './MobileNav';
 
 const pages = [
     { label: 'Projects', href: '/projects' },
@@ -23,6 +23,7 @@ const social = [
     { label: 'LinkedIn', href: socialLinks.linkedin, Icon: FiLinkedin },
     { label: 'Email', href: `mailto:${socialLinks.email}`, Icon: FiMail },
 ];
+
 /** Expone los enlaces de contacto en un menú accesible desde cualquier página. */
 function ContactMenu() {
     return (
@@ -60,6 +61,7 @@ function ContactMenu() {
         </Menu.Root>
     );
 }
+
 /** Permite cambiar contraste, movimiento y halo sin perder el foco del menú. */
 function DisplayMenu() {
     const { preferences, update } = usePreferences();
@@ -109,66 +111,33 @@ function DisplayMenu() {
         </Menu.Root>
     );
 }
+
 /** Adapta la navegación al espacio disponible y marca la ruta activa. */
 export default function Navbar() {
     const location = useLocation();
     return (
-        <nav className="site-nav" aria-label="Main navigation">
-            <Link to="/" className="brand" aria-label="Adrián Rodríguez, home">
-                Adrián<span aria-hidden="true">.</span>
-            </Link>
-            <div className="desktop-links">
-                {pages.map((page) => (
-                    <NavLink
-                        key={page.href}
-                        to={page.href}
-                        className={({ isActive }) => `nav-link${isActive ? ' is-active' : ''}`}
-                    >
-                        {page.label}
-                    </NavLink>
-                ))}
-            </div>
-            <div className="nav-utilities" key={location.key}>
-                <ContactMenu />
-                <DisplayMenu />
-                <div className="mobile-menu">
-                    <Menu.Root modal={false}>
-                        <Menu.Trigger
-                            className="nav-action icon-button"
-                            aria-label="Open navigation"
+        <>
+            <nav className="site-nav" aria-label="Main navigation">
+                <Link to="/" className="brand" aria-label="Adrián Rodríguez, home">
+                    Adrián<span aria-hidden="true">.</span>
+                </Link>
+                <div className="desktop-links">
+                    {pages.map((page) => (
+                        <NavLink
+                            key={page.href}
+                            to={page.href}
+                            className={({ isActive }) => `nav-link${isActive ? ' is-active' : ''}`}
                         >
-                            <FiMenu aria-hidden="true" />
-                        </Menu.Trigger>
-                        <Menu.Portal>
-                            <Menu.Content
-                                className="dropdown-panel"
-                                align="end"
-                                sideOffset={10}
-                                collisionPadding={16}
-                            >
-                                <Menu.Item asChild>
-                                    <Link className="dropdown-item" to="/">
-                                        Home
-                                    </Link>
-                                </Menu.Item>
-                                {pages.map((page) => (
-                                    <Menu.Item key={page.href} asChild>
-                                        <Link
-                                            className="dropdown-item"
-                                            to={page.href}
-                                            aria-current={
-                                                location.pathname === page.href ? 'page' : undefined
-                                            }
-                                        >
-                                            {page.label}
-                                        </Link>
-                                    </Menu.Item>
-                                ))}
-                            </Menu.Content>
-                        </Menu.Portal>
-                    </Menu.Root>
+                            {page.label}
+                        </NavLink>
+                    ))}
                 </div>
-            </div>
-        </nav>
+                <div className="nav-utilities" key={location.key}>
+                    <ContactMenu />
+                    <DisplayMenu />
+                </div>
+            </nav>
+            <MobileNav />
+        </>
     );
 }

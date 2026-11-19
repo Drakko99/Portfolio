@@ -1,0 +1,198 @@
+/* Navegación inferior: comparte el punto de corte de la barra superior. */
+.mobile-nav {
+    display: none;
+}
+
+@media (max-width: 700px) {
+    :root {
+        --mobile-nav-height: 4.75rem;
+        --mobile-nav-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+        --mobile-nav-space: calc(var(--mobile-nav-height) + var(--mobile-nav-bottom) + 12px);
+    }
+
+    /* Permite desplazar el último contenido y el footer por encima de la barra. */
+    .app-shell {
+        padding-bottom: var(--mobile-nav-space);
+    }
+
+    html {
+        scroll-padding-bottom: var(--mobile-nav-space);
+    }
+
+    .mobile-nav {
+        box-sizing: border-box;
+        display: block;
+        position: fixed;
+        z-index: 50;
+        bottom: var(--mobile-nav-bottom);
+        left: max(12px, env(safe-area-inset-left, 0px));
+        right: max(12px, env(safe-area-inset-right, 0px));
+        max-width: 460px;
+        height: var(--mobile-nav-height);
+        margin-inline: auto;
+        padding: 7px;
+        border: 1px solid #ffa46a4d;
+        border-radius: 999px;
+        background: #180908f5;
+        box-shadow:
+            0 14px 36px #0009,
+            inset 0 1px 0 #ffe5d633,
+            inset 0 -1px 0 #b02d2940;
+        isolation: isolate;
+    }
+
+    .mobile-nav-track {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        height: 100%;
+    }
+
+    /* Cada desplazamiento del 100% equivale al ancho de una de las cuatro opciones. */
+    .mobile-nav-indicator {
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 25%;
+        pointer-events: none;
+    }
+
+    .mobile-nav-lens {
+        position: absolute;
+        inset: 1px 3px;
+        border: 1px solid #ffae7599;
+        border-radius: 24px;
+        background:
+            radial-gradient(ellipse at 50% 0%, #ffd09c52, transparent 65%),
+            linear-gradient(155deg, #ec6a063d, #b02d2966 65%, #69000580);
+        box-shadow:
+            0 0 20px #ec6a0633,
+            inset 0 1px 1px #fff0dc80,
+            inset 0 -1px 1px #ec6a0666;
+    }
+
+    .mobile-nav-lens::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 28%;
+        right: 28%;
+        height: 2px;
+        border-radius: 999px;
+        background: #ffe3be;
+        box-shadow: 0 0 10px #ff8a38;
+    }
+
+    .mobile-nav-link {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        min-width: 0;
+        min-height: 44px;
+        padding: 6px 2px;
+        border-radius: 24px;
+        color: var(--muted);
+        text-decoration: none;
+        touch-action: manipulation;
+        transition: color 0.18s;
+    }
+
+    .mobile-nav-icon {
+        display: grid;
+        place-items: center;
+        width: 24px;
+        height: 24px;
+    }
+
+    .mobile-nav-icon svg {
+        width: 21px;
+        height: 21px;
+    }
+
+    .mobile-nav-label {
+        font-size: 0.6875rem;
+        font-weight: 500;
+        line-height: 1.3;
+        white-space: nowrap;
+    }
+
+    .mobile-nav-link.is-active {
+        color: #fff0df;
+    }
+
+    .mobile-nav-link.is-active .mobile-nav-icon {
+        filter: drop-shadow(0 0 6px #ec6a0673);
+    }
+
+    .mobile-nav-link:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: -2px;
+    }
+}
+
+/* Si no hay soporte para desenfoque, se conserva el fondo oscuro anterior. */
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .mobile-nav {
+        background: linear-gradient(155deg, #48201ad9, #120505db 60%, #250c0cde);
+        -webkit-backdrop-filter: blur(20px) saturate(150%);
+        backdrop-filter: blur(20px) saturate(150%);
+    }
+}
+
+/* Conserva las preferencias de accesibilidad del portfolio. */
+[data-contrast='high'] .mobile-nav {
+    background: var(--panel);
+    border-color: var(--line);
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+}
+
+[data-contrast='high'] .mobile-nav-lens {
+    background: var(--panel);
+    border: 2px solid var(--accent);
+    box-shadow: none;
+}
+
+[data-contrast='high'] .mobile-nav-lens::before {
+    display: none;
+}
+
+[data-contrast='high'] .mobile-nav-link.is-active {
+    color: var(--accent);
+}
+
+[data-contrast='high'] .mobile-nav-link.is-active .mobile-nav-icon {
+    filter: none;
+}
+
+@media (forced-colors: active) {
+    .mobile-nav {
+        background: Canvas;
+        border-color: ButtonText;
+        box-shadow: none;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+
+    .mobile-nav-indicator {
+        display: none;
+    }
+
+    .mobile-nav-link {
+        color: LinkText;
+    }
+
+    .mobile-nav-link.is-active {
+        color: LinkText;
+        outline: 2px solid Highlight;
+        outline-offset: -3px;
+    }
+
+    .mobile-nav-link.is-active .mobile-nav-icon {
+        filter: none;
+    }
+}
